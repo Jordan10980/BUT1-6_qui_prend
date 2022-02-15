@@ -62,7 +62,10 @@ public class Appli {
 //			cartes.afficherCartes();
 			System.out.println("\n");
 		}
-			
+		
+		Test c = new Test();
+		c.initialiserValeur();
+		System.out.println(c.toString());
 	}
 
 }
