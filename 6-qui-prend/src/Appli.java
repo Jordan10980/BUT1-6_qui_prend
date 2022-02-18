@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Appli {
 	
 	private static int nb_joueur = 0;
+	private static int nb_serie = 4;
 	static ArrayList<String> liste_joueurs = new ArrayList();
 	
 	public static void lecture_joueur (String nom) {
@@ -68,7 +69,19 @@ public class Appli {
 				System.out.println('\n');
 			}
 
-		
+			
+			System.out.println('\n');
+			System.out.println(p.getCartes());
+			System.out.println('\n');
+			Serie[] series = new Serie[nb_serie];
+			for(int i = 0; i < nb_serie; i++) {
+				series[i] = new Serie();
+				p.distributionSeries(series[i]);
+				System.out.println(series[i]);
+			}
+			
+			System.out.println('\n');
+			System.out.println(p.getCartes());
 
 	}
 

@@ -39,4 +39,15 @@ public class Paquet {
 		}
 	}
 	
+	public void distributionSeries(Serie serie) {
+		serie.setCarte(cartes.get(0), 0);
+		supprimerCarteSerie();
+	}
+	
+	public void supprimerCarteSerie() {
+		cartes.remove(0);
+	}
+	
+
+	
 }
