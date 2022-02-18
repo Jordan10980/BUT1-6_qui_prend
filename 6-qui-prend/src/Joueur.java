@@ -1,22 +1,26 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Joueur {
 	private String nom;
 	private int numero;
 	private static int numerocpt = 0;
-	private static int[] cartes = new int [10];
+	private static Carte[] cartes = new Carte[10];
+	private static int nb_cartes_joueur = 10;
 	
 	public Joueur() {
 		this.nom = nom;
 	    this.numero = numerocpt++;
 	    this.cartes = cartes;
+	    this.nb_cartes_joueur = nb_cartes_joueur;
 	}
 	
 	public Joueur(String nom_joueur) {
 		this.nom = nom_joueur;
 		this.numero = numerocpt++;
 		this.cartes = cartes;
+		this.nb_cartes_joueur = nb_cartes_joueur;
 		
 	}
 
@@ -28,13 +32,13 @@ public class Joueur {
 		return nom;
 	}
 	
-	public void setCartes(int valeurCarte, int indice) {
-		cartes[indice] = valeurCarte;	
+	public void setCarte(Carte c, int indice) {
+		cartes[indice] = c;
 	}
 	
-	public int getCartes(int indiceCartes) {
-		return cartes[indiceCartes];
-	}
+//	public int getCarte(int indiceCartes) {
+//		return cartes[indiceCartes];
+//	}
 	
 	public int getNumero() {
 		return numero;
@@ -42,5 +46,9 @@ public class Joueur {
 	
 	public void afficherCartes() {
 		System.out.println(cartes);
+	}
+	
+	public int getNbCarteJoueur() {
+		return nb_cartes_joueur;
 	}
 }

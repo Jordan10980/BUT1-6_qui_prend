@@ -48,7 +48,25 @@ public class Appli {
 			
 			Paquet p = new Paquet();
 			
+			System.out.println("Avant mélange");
+			
 			System.out.println(p.getCartes());
+			
+			System.out.println("Après mélange");
+			
+			p.melangerCartes();
+			
+			System.out.println(p.getCartes());
+			
+			System.out.println("\n\n\n");
+			
+			
+			for(int i = 0; i < nb_joueur; i++) {
+				p.distributionCartes(joueurs[i]);
+				System.out.println(joueurs[i]);
+				System.out.println(p.getCartes());
+				System.out.println('\n');
+			}
 
 		
 
