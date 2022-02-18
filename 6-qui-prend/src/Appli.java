@@ -46,26 +46,12 @@ public class Appli {
 			
 			System.out.println("CARTES");
 			
-			Carte cartes = new Carte();
+			Paquet p = new Paquet();
 			
-			
-			
-			cartes.initialiserValeur();
-			cartes.melangerCartes();
-			cartes.afficherCartes();
-			System.out.println("\n");
-					
-			
-		for(int i = 0; i < nb_joueur; i++) {
-			cartes.distributionCartes(joueurs[i]);
-			System.out.println(joueurs[i]);
-//			cartes.afficherCartes();
-			System.out.println("\n");
-		}
+			System.out.println(p.getCartes());
+
 		
-		Test c = new Test();
-		c.initialiserValeur();
-		System.out.println(c.toString());
+
 	}
 
 }

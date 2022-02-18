@@ -3,59 +3,57 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Carte {
+	private int numero;
+	private int nbTete;
+	private static int numerocpt = 1;
 	
-	private static int nb_cartes = 104;
-	static ArrayList<Integer> valeur = new ArrayList();
-	static ArrayList<Integer> penalite = new ArrayList();
-	private final int nb_cartes_joueurs = 10;
+	
 	
 	public Carte() {
-		this.valeur = valeur;
+		this.numero = numerocpt++;
+		this.nbTete = initNbTete(this.numero);
 	}
 	
-	public void initialiserValeur() {
+	
+	public int initNbTete(int numero) {
 		
-		for(int i = 1; i <= nb_cartes; i++) {
-			valeur.add(nb_cartes-nb_cartes + i);
-		}
-	}
-	
-
-	public void melangerCartes() {
-		Collections.shuffle(valeur);
+		if(taille(numero)> 1 && String.valueOf(numero).substring(taille(numero)-1).equals(String.valueOf(5)) && String.valueOf(numero).substring(taille(numero)-2,1).equals(String.valueOf(5)))
+			return 7;
 		
-	}
-	
-	public void afficherCartes() {
-		System.out.println(valeur);
-	}
-	
-	public void initialiserPenalite() {
+		if(String.valueOf(numero).substring(taille(numero)-1).equals(String.valueOf(5))) 
+			return 2;
 		
-	}
-	
-	public void retirerValList(int indice) {
-	
-	}
-	
-	public void distributionCartes(Joueur joueurs) {
-		for(int i = 0; i < nb_cartes_joueurs; i++) {
-			joueurs.setCartes(valeur.get(i), i);
-		}
-		SupprimerCartes();
-	
 			
-	}
-	
-	public void SupprimerCartes() {
-		for(int i = 0; i < nb_cartes_joueurs; i++) {
-			valeur.remove(0);
-		}
-	}
-
+		if(String.valueOf(numero).substring(taille(numero)-1).equals(String.valueOf(0))) 
+			return 3;
+		
+	    	
+		if(taille(numero)> 1 && String.valueOf(numero).substring(taille(numero)-1).equals(String.valueOf(numero).substring(taille(numero)-2,1))) 
+			return 5;
+		
+		else 
+			return 1;
 			
 	
-	
+}
 
+	public int taille(int numero) {
+		return Integer.toString(numero).length();
+	}
+	
+	public int getNumero() {
+		return numero;
+	}
+	
+	public int getNbTete() {
+		return nbTete;
+	}
+
+	@Override
+	public String toString() {
+		return "Carte [numero=" + numero + ", nbTete=" + nbTete + "]";
+	}
+	
+	
 	
 }
