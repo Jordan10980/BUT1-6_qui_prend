@@ -6,7 +6,7 @@ public class Joueur {
 	private String nom;
 	private int numero;
 	private static int numerocpt = 1;
-	private static Carte[] cartes = new Carte[10];
+	private Carte[] cartes = new Carte[10];
 	private static int nb_cartes_joueur = 10;
 	
 	public Joueur() {
