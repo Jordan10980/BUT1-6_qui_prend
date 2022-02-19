@@ -8,7 +8,7 @@ public class Test {
 	
 	
 	public Test() {
-		this.carte = carte;
+		//this.carte = carte;
 	}
 	
 	public void initialiserValeur() {

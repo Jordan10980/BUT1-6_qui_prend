@@ -13,7 +13,7 @@ public class Serie {
 	
 	public Serie(Carte c) {
 		this.numero = numerocpt++;
-		this.cartesSerie = cartesSerie;
+		//this.cartesSerie = cartesSerie;
 	}
 
 	@Override

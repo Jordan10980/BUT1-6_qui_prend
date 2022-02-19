@@ -49,5 +49,9 @@ public class Paquet {
 	}
 	
 
+	public void afficherCartes() {
+		System.out.println("Contenu du paquet de carte:\n" + this.cartes + "\n");
+
+	}
 	
 }

@@ -9,18 +9,18 @@ public class Joueur {
 	private Carte[] cartes = new Carte[10];
 	private static int nb_cartes_joueur = 10;
 	
-	public Joueur() {
-		this.nom = nom;
-	    this.numero = numerocpt++;
-	    this.cartes = cartes;
-	    this.nb_cartes_joueur = nb_cartes_joueur;
-	}
+//	public Joueur() {
+//		this.nom = nom;
+//	    this.numero = numerocpt++;
+//	    this.cartes = cartes;
+//	    this.nb_cartes_joueur = nb_cartes_joueur;
+//	}
 	
 	public Joueur(String nom_joueur) {
 		this.nom = nom_joueur;
 		this.numero = numerocpt++;
-		this.cartes = cartes;
-		this.nb_cartes_joueur = nb_cartes_joueur;
+		//this.cartes = cartes;
+		//this.nb_cartes_joueur = nb_cartes_joueur;
 		
 	}
 
