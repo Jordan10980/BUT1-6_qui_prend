@@ -2,6 +2,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author iPrisc
+ *
+ */
 public class Appli {
 	
 	private static int nb_joueur = 0;
