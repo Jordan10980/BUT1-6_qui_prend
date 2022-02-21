@@ -53,14 +53,16 @@ public class Appli {
 //		jeu.choixCartes();
 //		System.out.println(jeu);
 //		
+		for(int i = 0; i < joueurs.length; i++) {
+			
 		
-		System.out.println("A " + joueurs[0].getNom() + " de jouer.");
+		System.out.println("A " + joueurs[i].getNom() + " de jouer.");
 		Console.pause();
-		for(int i = 0; i < NB_SERIE; i++) {
-			System.out.println(series[i].toString1());
+		for(int j = 0; j < NB_SERIE; j++) {
+			System.out.println(series[j].toString1());
 		}
-		System.out.println(joueurs[0].toString1());
-
+		System.out.println(joueurs[i].toString1());
+		}
 	}
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
