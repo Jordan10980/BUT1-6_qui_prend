@@ -51,7 +51,12 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return "Carte [numero=" + numero + ", nbTete=" + nbTete + "]";
+		if (nbTete > 1) {
+			return String.valueOf(numero) + " (" + nbTete +")";
+		}
+		else {
+			return String.valueOf(numero) ;
+		}
 	}
 	
 	

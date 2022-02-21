@@ -20,6 +20,7 @@ public class Appli {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+	
 
 		// Initialise une liste de joueur pour la partie
 		Joueur[] joueurs = initialiserJoueur();
@@ -30,18 +31,37 @@ public class Appli {
 		// Distribue les cartes du paquet aux différents joueurs
 		for (int i = 0; i < joueurs.length; i++) {
 			p.distributionCartes(joueurs[i]);
-			System.out.println(joueurs[i]);
-			p.afficherCartes();
+//			System.out.println(joueurs[i]);
+//			p.afficherCartes();
 		}
 		
 		// Crée les séries pour le démarrage du jeu
 		Serie[] series = creerSeries(p);
-		p.afficherCartes();
+//		p.afficherCartes();
 		
 		// Démarrage du jeu....
 		
-	}
+		Jouer jeu = new Jouer(joueurs.length);
+		
+//		jeu.setJoueur(joueurs[0]);
+		
+		
+//		for (int i = 0; i < joueurs.length; i++) {
+//			jeu.setNomJoueurs(joueurs[i].getNom()); // récupère le nom des joueurs
+//		}
+//		
+//		jeu.choixCartes();
+//		System.out.println(jeu);
+//		
+		
+		System.out.println("A " + joueurs[0].getNom() + " de jouer.");
+		Console.pause();
+		for(int i = 0; i < NB_SERIE; i++) {
+			System.out.println(series[i].toString1());
+		}
+		System.out.println(joueurs[0].toString1());
 
+	}
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
 	 * 
@@ -53,7 +73,7 @@ public class Appli {
 		for (int i = 0; i < NB_SERIE; i++) {
 			series[i] = new Serie();
 			p.distributionSeries(series[i]);
-			System.out.println(series[i]);
+//			System.out.println(series[i]);
 		}
 
 		return series;
@@ -69,13 +89,13 @@ public class Appli {
 
 		Paquet p = new Paquet();
 
-		System.out.println("Avant mélange");
-		p.afficherCartes();
+//		System.out.println("Avant mélange");
+//		p.afficherCartes();
 
 		p.melangerCartes();
 
-		System.out.println("Après mélange");
-		p.afficherCartes();
+//		System.out.println("Après mélange");
+//		p.afficherCartes();
 
 		return p;
 	}
@@ -88,9 +108,9 @@ public class Appli {
 	private static Joueur[] initialiserJoueur() {
 
 		List<String> listeNomJoueurs = lireNomJoueur();
-		System.out.println(listeNomJoueurs); // Liste des joueurs
-		System.out.println(listeNomJoueurs.get(0));
-		System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
+//		System.out.println(listeNomJoueurs); // Liste des joueurs
+//		System.out.println(listeNomJoueurs.get(0));
+//		System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
 
 		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
 		for (int i = 0; i < listeNomJoueurs.size() ; i++) {

@@ -23,11 +23,20 @@ public class Joueur {
 		//this.nb_cartes_joueur = nb_cartes_joueur;
 		
 	}
-
+	
 	public String toString() {
 		return "Joueur " + numero + "[nom=" + nom + "]" +" Cartes : "+ Arrays.toString(cartes);
 	}
-	
+
+	public String toString1() { // Affichages des cartes du joueurs
+		String chaine = "- Vos cartes : ";
+		for(int i = 0; i < 9; i++) {
+			chaine += cartes[i]+", ";
+		}
+		chaine += cartes[9];
+		return chaine;
+	}
+
 	public String getNom(){
 		return nom;
 	}
