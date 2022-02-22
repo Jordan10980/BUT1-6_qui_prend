@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Class qui représente un joueur du jeu 6 qui prend avec :
@@ -38,7 +39,7 @@ public class Joueur {
 		for(int i = 0; i < cartes.size()-1; i++) {
 			chaine += cartes.get(i) +", ";
 		}
-		chaine += cartes.get(cartes.size());
+		chaine += cartes.get(cartes.size()-1);
 		return chaine;
 	}
 
@@ -78,4 +79,64 @@ public class Joueur {
 	public void prendCarte(Carte carte) {
 		cartes.add(carte);
 	}
+	
+//	public void choisirCarte() {
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("Saissisez votre choix : ");
+//		String rep = sc.next();
+//		int indice = carteExiste(Integer.valueOf(rep));
+//		if(indice != -1) {
+//			System.out.println("\n"+ cartes[indice]);
+//			System.out.println(Arrays.toString(cartes));
+//			supprimerCarteJoueur(indice);
+//			System.out.println(Arrays.toString(cartes));
+//			
+//		}
+//		else{
+//			choisirCarte();
+//		}
+//
+//	}
+	
+	public void choisirCarte() {
+		int indice = -1;
+		System.out.println("Saisissez votre choix : ");
+		
+		do {
+			Scanner sc = new Scanner(System.in);
+			String rep = sc.next();
+			indice = carteExiste(Integer.valueOf(rep));
+			if(indice != -1) {
+//				System.out.println(Arrays.toString(cartes)); //Avant suppression de la carte
+				Carte carteJoue = cartes.remove(indice);
+				// ajouter la carte dans une série....
+				
+
+//				supprimerCarteJoueur(indice);
+//				System.out.println(Arrays.toString(cartes)); //Après suppression de la carte
+//				nb_cartes_joueur--;
+//				System.out.println("Le joueur a maintenant " + nb_cartes_joueur + "cartes"); // nombre cartes Joueur
+			}
+			else{
+				System.out.println("Vous n'avez pas cette carte, saisissez votre choix :  ");	
+			}
+
+			
+		} while(indice == -1);
+	}
+	
+	
+	public int carteExiste(int valeur) {
+		for(int i = 0; i < cartes.size(); i++) {
+			if(valeur == cartes.get(i).getNumero())
+				return i;
+		}
+		
+		return -1;
+	}
+	
+//	public void supprimerCarteJoueur(int indice) {
+//		cartes[indice] = null;
+//	}
+	
 }

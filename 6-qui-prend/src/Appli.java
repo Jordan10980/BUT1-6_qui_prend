@@ -1,3 +1,5 @@
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -31,16 +33,12 @@ public class Appli {
 		// Distribue les cartes du paquet aux différents joueurs
 		for (int i = 0; i < joueurs.length; i++) {
 			p.distributionCartes(joueurs[i]);
-//			System.out.println(joueurs[i]);
-//			p.afficherCartes();
 		}
 		
 		// Crée les séries pour le démarrage du jeu
 		Serie[] series = creerSeries(p);
-//		p.afficherCartes();
 		
 		// Démarrage du jeu....
-		
 		Jouer jeu = new Jouer(joueurs.length);
 		
 //		jeu.setJoueur(joueurs[0]);
@@ -52,21 +50,28 @@ public class Appli {
 //		
 //		jeu.choixCartes();
 //		System.out.println(jeu);
-//		
-		for(int i = 0; i < joueurs.length; i++) {
-		
-			System.out.println("A " + joueurs[i].getNom() + " de jouer.");
-			Console.pause(); // pause libérée par je joueur qui vient de jouer
-			Console.clearScreen();
-			Console.pause(); // pause libérée par je joueur qui va jouer
-			for(int j = 0; j < NB_SERIE; j++) {
-				System.out.println(series[j].toString1());
-			}
-			System.out.println(joueurs[i].toString1());
 
-			// choisit sa carte à poser sur la serie...
+		System.out.println("A " + joueurs[0].getNom() + " de jouer.");
+		Console.pause();
+		for(int j = 0; j < NB_SERIE; j++) {
+			System.out.println(series[j].toString1());
 		}
+		System.out.println(joueurs[0].toString1());
+//		System.out.println("Saissisez votre choix : ");
+		joueurs[0].choisirCarte();
 		
+
+//		for(int i = 0; i < joueurs.length; i++) {
+//			
+//		
+//		System.out.println("A " + joueurs[i].getNom() + " de jouer.");
+//		Console.pause();
+//		for(int j = 0; j < NB_SERIE; j++) {
+//			System.out.println(series[j].toString1());
+//		}
+//		System.out.println(joueurs[i].toString1());
+//		
+//		}
 	}
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
@@ -79,7 +84,6 @@ public class Appli {
 		for (int i = 0; i < NB_SERIE; i++) {
 			series[i] = new Serie();
 			p.distributionSeries(series[i]);
-//			System.out.println(series[i]);
 		}
 
 		return series;
@@ -95,13 +99,7 @@ public class Appli {
 
 		Paquet p = new Paquet();
 
-//		System.out.println("Avant mélange");
-//		p.afficherCartes();
-
 		p.melangerCartes();
-
-//		System.out.println("Après mélange");
-//		p.afficherCartes();
 
 		return p;
 	}
@@ -114,14 +112,10 @@ public class Appli {
 	private static Joueur[] initialiserJoueur() {
 
 		List<String> listeNomJoueurs = lireNomJoueur();
-//		System.out.println(listeNomJoueurs); // Liste des joueurs
-//		System.out.println(listeNomJoueurs.get(0));
-//		System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
 
 		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
 		for (int i = 0; i < listeNomJoueurs.size() ; i++) {
 			joueurs[i] = new Joueur(listeNomJoueurs.get(i));
-//			System.out.println(joueurs[i]); Pour vérifier que les Joueuers ont des numéros et des noms différents
 		}
 
 		System.out.print("Les " + joueurs.length  + " joueurs sont ");
@@ -148,7 +142,6 @@ public class Appli {
 			Scanner in = new Scanner(new FileInputStream(nomFichierJoueur));
 			while (in.hasNextLine()) {
 				listeNomJoueurs.add(in.nextLine());
-//				nb_joueur++;
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
