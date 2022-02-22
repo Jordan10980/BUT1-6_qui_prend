@@ -56,5 +56,6 @@ public class Console {
 	}
 
 	private Console() {
+		
 	}
 }

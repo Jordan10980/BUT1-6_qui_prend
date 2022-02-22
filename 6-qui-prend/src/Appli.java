@@ -1,3 +1,5 @@
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -52,17 +54,28 @@ public class Appli {
 //		
 //		jeu.choixCartes();
 //		System.out.println(jeu);
-//		
-		for(int i = 0; i < joueurs.length; i++) {
-			
 		
-		System.out.println("A " + joueurs[i].getNom() + " de jouer.");
+		System.out.println("A " + joueurs[0].getNom() + " de jouer.");
 		Console.pause();
 		for(int j = 0; j < NB_SERIE; j++) {
 			System.out.println(series[j].toString1());
 		}
-		System.out.println(joueurs[i].toString1());
-		}
+		System.out.println(joueurs[0].toString1());
+//		System.out.println("Saissisez votre choix : ");
+		joueurs[0].choisirCarte();
+		
+
+//		for(int i = 0; i < joueurs.length; i++) {
+//			
+//		
+//		System.out.println("A " + joueurs[i].getNom() + " de jouer.");
+//		Console.pause();
+//		for(int j = 0; j < NB_SERIE; j++) {
+//			System.out.println(series[j].toString1());
+//		}
+//		System.out.println(joueurs[i].toString1());
+//		
+//		}
 	}
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
