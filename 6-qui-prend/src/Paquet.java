@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Paquet {
 	
-	private ArrayList<Carte> cartes = new ArrayList<Carte>();
+	private List<Carte> cartes = new ArrayList<Carte>();
 	private final static int nbCartes = 104;
 	private static int nb_cartes_joueur = 10;
 	
@@ -16,7 +16,7 @@ public class Paquet {
 		}
 	}
 	
-	public ArrayList<Carte> getCartes(){
+	public List<Carte> getCartes(){
 		return cartes;
 	}
 	
@@ -25,19 +25,25 @@ public class Paquet {
 	}
 	
 	public void distributionCartes(Joueur joueur) {
+
 		for(int i = 0; i < nb_cartes_joueur; i++) {
-			joueur.setCarte(cartes.get(i), i);
-			
+			Carte carte = cartes.remove(0);
+			joueur.prendCarte(carte);
 		}
-		SupprimerCartes();
+		
+//		for(int i = 0; i < nb_cartes_joueur; i++) {
+//			joueur.setCarte(cartes.get(i), i);
+//			
+//		}
+//		SupprimerCartes();
 		
 	}
 	
-	public void SupprimerCartes() {
-		for(int i = 0; i < nb_cartes_joueur; i++) {
-			cartes.remove(0);
-		}
-	}
+//	public void SupprimerCartes() {
+//		for(int i = 0; i < nb_cartes_joueur; i++) {
+//			cartes.remove(0);
+//		}
+//	}
 	
 	public void distributionSeries(Serie serie) {
 		serie.setCarte(cartes.get(0), 0);

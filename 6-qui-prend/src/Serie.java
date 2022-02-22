@@ -1,12 +1,12 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class Serie {
 	private static final int maxCartesSerie = 5;
 //	private static Carte[] cartesSerie = new Carte[5]; 
 	private int numero;
 	private static int numerocpt = 1;
-	private ArrayList<Carte> cartesSerie = new ArrayList(5);
+	private List<Carte> cartesSerie = new ArrayList(5);
 	
 	
 	public Serie() {
