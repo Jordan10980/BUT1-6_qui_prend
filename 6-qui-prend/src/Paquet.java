@@ -16,9 +16,9 @@ public class Paquet {
 		}
 	}
 	
-	public List<Carte> getCartes(){
-		return cartes;
-	}
+//	public List<Carte> getCartes(){
+//		return cartes;
+//	}
 	
 	public void melangerCartes() {
 		Collections.shuffle(cartes);
@@ -46,18 +46,21 @@ public class Paquet {
 //	}
 	
 	public void distributionSeries(Serie serie) {
-		serie.setCarte(cartes.get(0), 0);
-		supprimerCarteSerie();
+		Carte carte = cartes.remove(0);
+		serie.ajouterCarte(carte);
+		
+//		serie.setCarte(cartes.get(0), 0);
+//		supprimerCarteSerie();
 	}
 	
-	public void supprimerCarteSerie() {
-		cartes.remove(0);
-	}
+//	public void supprimerCarteSerie() {
+//		cartes.remove(0);
+//	}
 	
 
-	public void afficherCartes() {
-		System.out.println("Contenu du paquet de carte:\n" + this.cartes + "\n");
-
-	}
+//	public void afficherCartes() {
+//		System.out.println("Contenu du paquet de carte:\n" + this.cartes + "\n");
+//
+//	}
 	
 }
