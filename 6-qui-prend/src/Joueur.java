@@ -82,21 +82,19 @@ public class Joueur {
 	
 	public void choisirCarte() {
 		int indice = -1;
-		System.out.println("Saisissez votre choix : ");
+		System.out.print("Saisissez votre choix : ");
 		
 		do {
 			Scanner sc = new Scanner(System.in);
 			String rep = sc.next();
 			indice = carteExiste(Integer.valueOf(rep));
 			if(indice != -1) {
-//				System.out.println(Arrays.toString(cartes)); //Avant suppression de la carte
-				supprimerCarteJoueur(indice);
-//				System.out.println(Arrays.toString(cartes)); //Après suppression de la carte
+				Partie.cartes_posees.add(cartes[indice]);
 				nb_cartes_joueur--;
-//				System.out.println("Le joueur a maintenant " + nb_cartes_joueur + "cartes"); // nombre cartes Joueur
+				supprimerCarteJoueur(indice);
 			}
 			else{
-				System.out.println("Vous n'avez pas cette carte, saisissez votre choix :  ");	
+				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 
 			

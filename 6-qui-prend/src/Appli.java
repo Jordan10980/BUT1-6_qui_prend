@@ -3,6 +3,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,9 +13,9 @@ import java.util.Scanner;
  *
  */
 public class Appli {
+	
 
-//	private static int nb_joueur = 0;
-	private static final int NB_SERIE = 4;
+//	private static final int NB_SERIE = 4;
 
 	/**
 	 * Méthode principale permettant de lancer une partie de 6-qui-prend
@@ -25,57 +26,47 @@ public class Appli {
 	
 
 		// Initialise une liste de joueur pour la partie
-		Joueur[] joueurs = initialiserJoueur();
+		Joueur[] joueurs = Partie.initialiserJoueur();
 
 		// Recupère un paquet mélangé
-		Paquet p = recupererNouveauPaquet();
+		Paquet p = Partie.recupererNouveauPaquet();
 		
 		// Distribue les cartes du paquet aux différents joueurs
 		for (int i = 0; i < joueurs.length; i++) {
 			p.distributionCartes(joueurs[i]);
-//			System.out.println(joueurs[i]);
-//			p.afficherCartes();
 		}
 		
 		// Crée les séries pour le démarrage du jeu
-		Serie[] series = creerSeries(p);
-//		p.afficherCartes();
+		Serie[] series = Partie.creerSeries(p);
+		
 		
 		// Démarrage du jeu....
 		
-		Jouer jeu = new Jouer(joueurs.length);
 		
-//		jeu.setJoueur(joueurs[0]);
-		
-		
-//		for (int i = 0; i < joueurs.length; i++) {
-//			jeu.setNomJoueurs(joueurs[i].getNom()); // récupère le nom des joueurs
-//		}
-//		
-//		jeu.choixCartes();
-//		System.out.println(jeu);
-		
-		System.out.println("A " + joueurs[0].getNom() + " de jouer.");
-		Console.pause();
-		for(int j = 0; j < NB_SERIE; j++) {
-			System.out.println(series[j].toString1());
+//		 permet aux joueurs de choisir leurs cartes
+		for(int i = 0; i< joueurs.length; i++) {
+			System.out.println("A " + joueurs[i].getNom() + " de jouer.");
+			Console.pause();
+			for(int j = 0; j < Partie.NB_SERIE; j++) {
+				System.out.println(series[j].toString1());
+			}
+			System.out.println(joueurs[i].toString1());
+			joueurs[i].choisirCarte();
+			Console.clearScreen();
+			
 		}
-		System.out.println(joueurs[0].toString1());
-//		System.out.println("Saissisez votre choix : ");
-		joueurs[0].choisirCarte();
 		
-
+//		 A continuer
+//		System.out.println(Partie.cartes_posees);
+//		
+//		System.out.println("Les cartes ");
 //		for(int i = 0; i < joueurs.length; i++) {
-//			
-//		
-//		System.out.println("A " + joueurs[i].getNom() + " de jouer.");
-//		Console.pause();
-//		for(int j = 0; j < NB_SERIE; j++) {
-//			System.out.println(series[j].toString1());
+//			System.out.println();
 //		}
-//		System.out.println(joueurs[i].toString1());
+//	
 //		
-//		}
+		
+		
 	}
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
@@ -83,16 +74,16 @@ public class Appli {
 	 * @param p : le paquet de carte de la partie
 	 * @return les séries créées
 	 */
-	private static Serie[] creerSeries(Paquet p) {
-		Serie[] series = new Serie[NB_SERIE];
-		for (int i = 0; i < NB_SERIE; i++) {
-			series[i] = new Serie();
-			p.distributionSeries(series[i]);
-//			System.out.println(series[i]);
-		}
-
-		return series;
-	}
+//	private static Serie[] creerSeries(Paquet p) {
+//		Serie[] series = new Serie[NB_SERIE];
+//		for (int i = 0; i < NB_SERIE; i++) {
+//			series[i] = new Serie();
+//			p.distributionSeries(series[i]);
+////			System.out.println(series[i]);
+//		}
+//
+//		return series;
+//	}
 
 	/**
 	 * Récupère un nouveau paquet de carte complet pour jouer à 6-qui-prend<BR>
@@ -100,47 +91,40 @@ public class Appli {
 	 * 
 	 * @return le paquet de carte prêt à être distribué
 	 */
-	private static Paquet recupererNouveauPaquet() {
-
-		Paquet p = new Paquet();
-
-//		System.out.println("Avant mélange");
-//		p.afficherCartes();
-
-		p.melangerCartes();
-
-//		System.out.println("Après mélange");
-//		p.afficherCartes();
-
-		return p;
-	}
+//	private static Paquet recupererNouveauPaquet() {
+//
+//		Paquet p = new Paquet();
+//		p.melangerCartes();
+//		
+//		return p;
+//	}
 
 	/**
 	 * Initialise un tableau de joueur pour la partie en fonction d'une liste de nom de joueur.
 	 * 
 	 * @return le tableau de joueur prêt à jouer à 6-qui-prend
 	 */
-	private static Joueur[] initialiserJoueur() {
-
-		List<String> listeNomJoueurs = lireNomJoueur();
-//		System.out.println(listeNomJoueurs); // Liste des joueurs
-//		System.out.println(listeNomJoueurs.get(0));
-//		System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
-
-		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
-		for (int i = 0; i < listeNomJoueurs.size() ; i++) {
-			joueurs[i] = new Joueur(listeNomJoueurs.get(i));
-//			System.out.println(joueurs[i]); Pour vérifier que les Joueuers ont des numéros et des noms différents
-		}
-
-		System.out.print("Les " + joueurs.length  + " joueurs sont ");
-		for (int i = 0; i < joueurs.length  - 1; i++) {
-			System.out.print(joueurs[i].getNom() + ", ");
-		}
-		System.out.println("et " + joueurs[joueurs.length  - 1].getNom() + ". Merci de jouer à 6 qui prend !");
-
-		return joueurs;
-	}
+//	private static Joueur[] initialiserJoueur() {
+//
+//		List<String> listeNomJoueurs = lireNomJoueur();
+////--		System.out.println(listeNomJoueurs); // Liste des joueurs
+////	--	System.out.println(listeNomJoueurs.get(0));
+////	--	System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
+//
+//		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
+//		for (int i = 0; i < listeNomJoueurs.size() ; i++) {
+//			joueurs[i] = new Joueur(listeNomJoueurs.get(i));
+////	--		System.out.println(joueurs[i]); Pour vérifier que les Joueuers ont des numéros et des noms différents
+//		}
+//
+//		System.out.print("Les " + joueurs.length  + " joueurs sont ");
+//		for (int i = 0; i < joueurs.length  - 1; i++) {
+//			System.out.print(joueurs[i].getNom() + ", ");
+//		}
+//		System.out.println("et " + joueurs[joueurs.length  - 1].getNom() + ". Merci de jouer à 6 qui prend !");
+//
+//		return joueurs;
+//	}
 
 	
 	/**
@@ -148,26 +132,27 @@ public class Appli {
 	 * 
 	 * @return la liste des nom de joueur
 	 */
-	public static List<String> lireNomJoueur() {
+//	public static List<String> lireNomJoueur() {
+//
+//		final String nomFichierJoueur = "config.txt";
+//		List<String> listeNomJoueurs = new ArrayList<String>();
+//		try {
+//
+//			Scanner in = new Scanner(new FileInputStream(nomFichierJoueur));
+//			while (in.hasNextLine()) {
+//				listeNomJoueurs.add(in.nextLine());
+//			}
+//			in.close();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("Impossible d'ouvrir le fichier " + nomFichierJoueur +  " contenant les noms des joueurs.");
+//			System.out.println("La partie ne peux donc pas commencer...");
+//			throw new RuntimeException(e);
+//		}
+//		
+//		return listeNomJoueurs;
+//	}
+	
 
-		final String nomFichierJoueur = "config.txt";
-		List<String> listeNomJoueurs = new ArrayList<String>();
-		try {
-
-			Scanner in = new Scanner(new FileInputStream(nomFichierJoueur));
-			while (in.hasNextLine()) {
-				listeNomJoueurs.add(in.nextLine());
-//				nb_joueur++;
-			}
-			in.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Impossible d'ouvrir le fichier " + nomFichierJoueur +  " contenant les noms des joueurs.");
-			System.out.println("La partie ne peux donc pas commencer...");
-			throw new RuntimeException(e);
-		}
-		
-		return listeNomJoueurs;
-	}
 
 	
 }
