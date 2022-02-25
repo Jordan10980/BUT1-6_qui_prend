@@ -24,34 +24,21 @@ public class Appli {
 	 */
 	public static void main(String[] args) {
 	
-
-		// Initialise une liste de joueur pour la partie
-		Joueur[] joueurs = Partie.initialiserJoueur();
-
-		// Recupère un paquet mélangé
-		Paquet p = Partie.recupererNouveauPaquet();
-		
-		// Distribue les cartes du paquet aux différents joueurs
-		for (int i = 0; i < joueurs.length; i++) {
-			p.distributionCartes(joueurs[i]);
-		}
-		
-		// Crée les séries pour le démarrage du jeu
-		Serie[] series = Partie.creerSeries(p);
-		
+		Partie partie = new Partie();
 		
 		// Démarrage du jeu....
 		
 		
+		
 //		 permet aux joueurs de choisir leurs cartes
-		for(int i = 0; i< joueurs.length; i++) {
-			System.out.println("A " + joueurs[i].getNom() + " de jouer.");
+		for(int i = 0; i< partie.nbJoueur(); i++) {
+			System.out.println("A " + partie.getJoueurs(i).getNom() + " de jouer.");
 			Console.pause();
 			for(int j = 0; j < Partie.NB_SERIE; j++) {
-				System.out.println(series[j].toString1());
+				System.out.println(partie.getSeries(j).toString1());
 			}
-			System.out.println(joueurs[i].toString1());
-			joueurs[i].choisirCarte();
+			System.out.println(partie.getJoueurs(i).toString1());
+			partie.getJoueurs(i).choisirCarte();
 			Console.clearScreen();
 			
 		}

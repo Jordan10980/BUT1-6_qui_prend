@@ -1,13 +1,33 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Partie {
 	public static final int NB_SERIE = 4;
-	static ArrayList<Carte> cartes_posees = new ArrayList<Carte>();
+	static List<Carte> cartes_posees = new ArrayList<Carte>();
+	
+	Joueur[] joueurs;
+	Paquet paquet;
+	Serie[] series;
+	
+	public Partie() {
+		// Initialise une liste de joueur pour la partie
+		this.joueurs = initialiserJoueur();
+
+		// Recupère un paquet mélangé
+		this.paquet = recupererNouveauPaquet();
+		
+		// Distribue les cartes du paquet aux différents joueurs
+		for (int i = 0; i < joueurs.length; i++) {
+			paquet.distributionCartes(joueurs[i]);
+		}
+		
+		// Crée les séries pour le démarrage du jeu
+		this.series = creerSeries(paquet);
+		
+	}
 	
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
@@ -15,7 +35,7 @@ public class Partie {
 	 * @param p : le paquet de carte de la partie
 	 * @return les séries créées
 	 */
-	public static Serie[] creerSeries(Paquet p) {
+	private Serie[] creerSeries(Paquet p) {
 		Serie[] series = new Serie[NB_SERIE];
 		for (int i = 0; i < NB_SERIE; i++) {
 			series[i] = new Serie();
@@ -32,7 +52,7 @@ public class Partie {
 	 * 
 	 * @return le paquet de carte prêt à être distribué
 	 */
-	public static Paquet recupererNouveauPaquet() {
+	private Paquet recupererNouveauPaquet() {
 
 		Paquet p = new Paquet();
 		p.melangerCartes();
@@ -45,7 +65,7 @@ public class Partie {
 	 * 
 	 * @return le tableau de joueur prêt à jouer à 6-qui-prend
 	 */
-	public static Joueur[] initialiserJoueur() {
+	private Joueur[] initialiserJoueur() {
 
 		List<String> listeNomJoueurs = lireNomJoueur();
 //		System.out.println(listeNomJoueurs); // Liste des joueurs
@@ -73,7 +93,7 @@ public class Partie {
 	 * 
 	 * @return la liste des nom de joueur
 	 */
-	public static List<String> lireNomJoueur() {
+	private List<String> lireNomJoueur() {
 
 		final String nomFichierJoueur = "config.txt";
 		List<String> listeNomJoueurs = new ArrayList<String>();
@@ -92,8 +112,24 @@ public class Partie {
 		
 		return listeNomJoueurs;
 	}
+
+	public Joueur getJoueurs(int indice) {
+		return joueurs[indice];
+	}
+
+	public Paquet getPaquet() {
+		return paquet;
+	}
+
+	public Serie getSeries(int indice) {
+		return series[indice];
+	}
 	
 
+	public int nbJoueur() {
+		return joueurs.length;
+	}
+	
 	
 //	public static void Tour0() {
 //		for(int i = 0; i< joueurs.length; i++) {
@@ -109,10 +145,5 @@ public class Partie {
 //		}
 //		
 //	}
-
-	private Partie() {
-		
-	}
-	
 
 }
