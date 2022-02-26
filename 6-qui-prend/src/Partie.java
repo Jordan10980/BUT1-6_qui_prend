@@ -6,12 +6,42 @@ import java.util.Scanner;
 
 public class Partie {
 	public static final int NB_SERIE = 4;
-	static List<Carte> cartes_posees = new ArrayList<Carte>();
+	//static List<Carte> cartes_posees = new ArrayList<Carte>();
 	
+	// Les joueurs participant à la partie
 	Joueur[] joueurs;
+	
+	// Le paquet de carte utilisé durant la partie
 	Paquet paquet;
+	
+	// Les différentes séries "en cours" utilisées durant la partie
 	Serie[] series;
 	
+
+	public Joueur getJoueurs(int indice) {
+		return joueurs[indice];
+	}
+
+	public Paquet getPaquet() {
+		return paquet;
+	}
+
+	public Serie getSeries(int indice) {
+		return series[indice];
+	}
+	
+
+	public int nbJoueur() {
+		return joueurs.length;
+	}
+
+	/**
+	 * La création/initialisation d'une Partie consiste en:
+	 * <LI> La création des joueurs de la partie à partir du fichier config.txt
+	 * <LI> La création d'un paquet de carte mélangé
+	 * <LI> La distribution des cartes aux différents joueurs
+	 * <LI> La création/initialisation des série avec une carte initiale
+	 */
 	public Partie() {
 		// Initialise une liste de joueur pour la partie
 		this.joueurs = initialiserJoueur();
@@ -26,7 +56,6 @@ public class Partie {
 		
 		// Crée les séries pour le démarrage du jeu
 		this.series = creerSeries(paquet);
-		
 	}
 	
 	/**
@@ -38,13 +67,22 @@ public class Partie {
 	private Serie[] creerSeries(Paquet p) {
 		Serie[] series = new Serie[NB_SERIE];
 		for (int i = 0; i < NB_SERIE; i++) {
-			series[i] = new Serie();
-			p.distributionSeries(series[i]);
-//			System.out.println(series[i]);
+			series[i] = creerNouvelleSerie(p);
 		}
-
 		return series;
 	}
+
+	/**
+	 * Création/initialisation d'une nouvelle serie
+	 * @param paquet : le paquet nécéssaire à l'initilaition de la série
+	 * @return la nouvelle série créée et initialisée
+	 */
+	private Serie creerNouvelleSerie(Paquet paquet) {
+		Serie serie  = new Serie();
+		paquet.distributionSeries(serie);
+		return serie;
+	}
+
 
 	/**
 	 * Récupère un nouveau paquet de carte complet pour jouer à 6-qui-prend<BR>
@@ -53,10 +91,8 @@ public class Partie {
 	 * @return le paquet de carte prêt à être distribué
 	 */
 	private Paquet recupererNouveauPaquet() {
-
 		Paquet p = new Paquet();
 		p.melangerCartes();
-		
 		return p;
 	}
 
@@ -113,37 +149,43 @@ public class Partie {
 		return listeNomJoueurs;
 	}
 
-	public Joueur getJoueurs(int indice) {
-		return joueurs[indice];
-	}
-
-	public Paquet getPaquet() {
-		return paquet;
-	}
-
-	public Serie getSeries(int indice) {
-		return series[indice];
-	}
 	
-
-	public int nbJoueur() {
-		return joueurs.length;
-	}
-	
-	
-//	public static void Tour0() {
-//		for(int i = 0; i< joueurs.length; i++) {
-//			System.out.println("A " + joueurs[i].getNom() + " de jouer.");
-//			Console.pause();
-//			for(int j = 0; j < Partie.NB_SERIE; j++) {
-//				System.out.println(series[j].toString1());
-//			}
-//			System.out.println(joueurs[i].toString1());
-//			joueurs[i].choisirCarte();
-//			Console.clearScreen();
-//			
-//		}
+	/**
+	 * Démarre une partie préalablement créée/initialisée avec l'ensemble des joueurs (et leur main) et des séries.
+	 * 
+	 */
+	public void demarrer() {
+//		 permet aux joueurs de choisir leurs cartes
+		for(int i = 0; i< this.nbJoueur(); i++) {
+			System.out.println("A " + this.getJoueurs(i).getNom() + " de jouer.");
+			Console.pause();
+			for(int j = 0; j < Partie.NB_SERIE; j++) {
+				System.out.println(this.getSeries(j).toString1());
+			}
+			System.out.println(this.getJoueurs(i).toString1());
+			Carte carteChoisie = this.getJoueurs(i).choisirCarte();
+			this.placerCarte(carteChoisie);
+			Console.clearScreen();
+		}
+		
+//		 A continuer
+//		System.out.println(Partie.cartes_posees);
 //		
-//	}
+//		System.out.println("Les cartes ");
+//		for(int i = 0; i < joueurs.length; i++) {
+//			System.out.println();
+//		}
+//	
+//		
+	}
+	
+	/**
+	 * Place une carte sur l'une des séries selon les règles définies par le jeu 6-qui-prend.<BR>
+	 * La carte est ajoutée à la liste de carte de la série.
+	 * @param carteAPlacer : la carte à placer sur la bonne série
+	 */
+	public void placerCarte(Carte carteAPlacer) {
+		// A développer
+	}
 
 }

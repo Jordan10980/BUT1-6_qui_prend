@@ -17,8 +17,6 @@ public class Joueur {
 	private int numero;
 	private static int numerocpt = 1;
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
-//	private Carte[] cartes = new Carte[10];
-//	private static int nb_cartes_joueur = 10;
 	
 	/**
 	 * Constructeur pour initialiser un joueur. <br>
@@ -52,14 +50,6 @@ public class Joueur {
 		return nom;
 	}
 	
-//	public void setCarte(Carte c, int indice) {
-//		cartes[indice] = c;
-//	}
-	
-//	public int getCarte(int indiceCartes) {
-//		return cartes[indiceCartes];
-//	}
-	
 	/**
 	 * retourne le numéro
 	 * @return le numéro
@@ -67,10 +57,6 @@ public class Joueur {
 	public int getNumero() {
 		return numero;
 	}
-	
-//	public void afficherCartes() {
-//		System.out.println(cartes);
-//	}
 	
 	/**
 	 * Retourne le nombre de carte dans la main du joueur
@@ -88,48 +74,32 @@ public class Joueur {
 		cartes.add(carte);
 	}
 
-	//	public void choisirCarte() {
-//		Scanner sc = new Scanner(System.in);
-//		System.out.println("Saissisez votre choix : ");
-//		String rep = sc.next();
-//		int indice = carteExiste(Integer.valueOf(rep));
-//		if(indice != -1) {
-//			System.out.println("\n"+ cartes[indice]);
-//			System.out.println(Arrays.toString(cartes));
-//			supprimerCarteJoueur(indice);
-//			System.out.println(Arrays.toString(cartes));
-//			
-//		}
-//		else{
-//			choisirCarte();
-//		}
-//
-//	}
-	
-	public void choisirCarte() {
+	/**
+	 * Choix d'une carte par le joueur parmi les cartes de sa main.
+	 * @return la carte choisie
+	 */
+	public Carte choisirCarte() {
 		int indice = -1;
 		System.out.print("Saisissez votre choix : ");
 		
+		Carte carteChoisie=null;
 		do {
 			Scanner sc = new Scanner(System.in);
 			String rep = sc.next();
 			indice = carteExiste(Integer.valueOf(rep));
 			if(indice != -1) {
-				Carte carteJoue = cartes.remove(indice);
-				Partie.cartes_posees.add(carteJoue);
-//				nb_cartes_joueur--;
-//				supprimerCarteJoueur(indice);
+				carteChoisie = cartes.remove(indice);
+				//Partie.cartes_posees.add(carteJoue);
 			}
 			else{
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
-
-			
 		} while(indice == -1);
+		return carteChoisie;
 	}
 	
 	
-	public int carteExiste(int valeur) {
+	private int carteExiste(int valeur) {
 		for(int i = 0; i < cartes.size(); i++) {
 			if(valeur == cartes.get(i).getNumero())
 				return i;
@@ -137,9 +107,5 @@ public class Joueur {
 		
 		return -1;
 	}
-	
-//	public void supprimerCarteJoueur(int indice) {
-//		cartes[indice] = null;
-//	}
 	
 }
