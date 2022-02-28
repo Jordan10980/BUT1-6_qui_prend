@@ -45,14 +45,10 @@ public class Paquet {
 //	}
 	
 	public void distributionSeries(Serie serie) {
-		serie.setCarte(cartes.get(0), 0);
-		supprimerCarteSerie();
+		serie.ajouterCarte(cartes.remove(0));
 	}
 	
-	public void supprimerCarteSerie() {
-		cartes.remove(0);
-	}
-	
+
 
 	public void afficherCartes() {
 		System.out.println("Contenu du paquet de carte:\n" + this.cartes + "\n");

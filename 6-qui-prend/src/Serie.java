@@ -21,21 +21,15 @@ public class Serie {
 
 
 	@Override
-	public String toString() {
-		
-		return "- série n° "+numero +" : "+ cartesSerie;
-	}
-	
-
-	public String toString1() { // Affichages des cartes du joueurs
+	public String toString() { // Affichages des cartes de la serie
 		String chaine = "- série n° " + numero +" : ";
-		int i = 0;
+		boolean first = true;
 		for(Carte c : cartesSerie) {
-			chaine += cartesSerie.get(i);
-			i++;
-			if(cartesSerie.size() > 2) {
-				
-			}
+			if(!first)
+				chaine += ", ";
+			else 
+				first = false;
+			chaine += c ;
 		}
 		return chaine;
 	}
@@ -45,7 +39,29 @@ public class Serie {
 		return numero;
 	}
 	
-	public void setCarte(Carte c, int indice) {
+//	public void setCarte(Carte c, int indice) {
+//		cartesSerie.add(c);
+//	}
+	
+	public Carte derniereCarte() {
+		int i = cartesSerie.size();
+		return cartesSerie.get(i-1);
+	}
+	
+	public void ajouterCarte(Carte c) {
 		cartesSerie.add(c);
 	}
+
+	public boolean estPleine() {
+		return (cartesSerie.size() == 5);
+	}
+
+	public int nbTete() {
+		int somme = 0;
+		for(int i = 0; i < cartesSerie.size(); i++) {
+			somme += cartesSerie.get(i).getNbTete();
+		}
+		return somme;
+	}
+	
 }

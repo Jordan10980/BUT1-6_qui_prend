@@ -17,6 +17,7 @@ public class Joueur {
 	private int numero;
 	private static int numerocpt = 1;
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
+	private int nbTete;
 	
 	/**
 	 * Constructeur pour initialiser un joueur. <br>
@@ -26,6 +27,7 @@ public class Joueur {
 	public Joueur(String nom_joueur) {
 		this.nom = nom_joueur;
 		this.numero = numerocpt++;
+		this.nbTete = 0;
 	}
 	
 	@Override
@@ -35,10 +37,14 @@ public class Joueur {
 
 	public String toString1() { // Affichages des cartes du joueurs
 		String chaine = "- Vos cartes : ";
-		for(int i = 0; i < cartes.size()-1; i++) {
-			chaine += cartes.get(i)+", ";
+		boolean first = true;
+		for(Carte c : cartes) {
+			if(!first)
+				chaine += ", ";
+			else 
+				first = false;
+			chaine += c ;
 		}
-		chaine += cartes.get(cartes.size()-1);
 		return chaine;
 	}
 
@@ -108,4 +114,16 @@ public class Joueur {
 		return -1;
 	}
 	
+	
+	public void ajouterTete (int nbTete){
+		this.nbTete += nbTete;
+	}
+
+	public Serie choisirSerie() {
+		// à faire
+		return null;
+	}
+	
 }
+
+	

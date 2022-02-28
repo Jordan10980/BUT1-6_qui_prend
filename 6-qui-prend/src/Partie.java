@@ -160,11 +160,14 @@ public class Partie {
 			System.out.println("A " + this.getJoueurs(i).getNom() + " de jouer.");
 			Console.pause();
 			for(int j = 0; j < Partie.NB_SERIE; j++) {
-				System.out.println(this.getSeries(j).toString1());
+				System.out.println(this.getSeries(j));
 			}
 			System.out.println(this.getJoueurs(i).toString1());
 			Carte carteChoisie = this.getJoueurs(i).choisirCarte();
-			this.placerCarte(carteChoisie);
+			
+			if(!this.placerCarte(carteChoisie, this.getJoueurs(i))) {
+				Serie serie = this.getJoueurs(i).choisirSerie();
+			}
 			Console.clearScreen();
 		}
 		
@@ -184,8 +187,35 @@ public class Partie {
 	 * La carte est ajoutée à la liste de carte de la série.
 	 * @param carteAPlacer : la carte à placer sur la bonne série
 	 */
-	public void placerCarte(Carte carteAPlacer) {
-		// A développer
+	public boolean placerCarte(Carte carteAPlacer, Joueur joueur) {
+		int indiceSerieTrouvee = -1;
+		for(int i = 0; i < Partie.NB_SERIE; i++) {
+			Serie serie = series[i];
+			Carte derniereCarte = serie.derniereCarte();
+			if(carteAPlacer.getNumero() > derniereCarte.getNumero()) {
+				if(indiceSerieTrouvee != -1) {
+					if(derniereCarte.getNumero() > series[indiceSerieTrouvee].derniereCarte().getNumero()) {
+						indiceSerieTrouvee = i;
+					}
+				}
+				else {
+					indiceSerieTrouvee = i;
+				}
+			}			
+		}
+		
+		if(indiceSerieTrouvee == -1) {
+			return false;
+		}
+		else {
+			if(series[indiceSerieTrouvee].estPleine()) {
+				int nbTete = series[indiceSerieTrouvee].nbTete();
+				joueur.ajouterTete(nbTete);
+				Serie serie = new Serie();
+				series[indiceSerieTrouvee] = serie;
+			}
+			series[indiceSerieTrouvee].ajouterCarte(carteAPlacer);
+			return true;	
+		}
 	}
-
 }

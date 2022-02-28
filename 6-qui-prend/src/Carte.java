@@ -15,7 +15,7 @@ public class Carte {
 	}
 	
 	
-	public int initNbTete(int numero) {
+	private int initNbTete(int numero) {
 		
 		if(taille(numero)> 1 && String.valueOf(numero).substring(taille(numero)-1).equals(String.valueOf(5)) && String.valueOf(numero).substring(taille(numero)-2,1).equals(String.valueOf(5)))
 			return 7;
@@ -58,7 +58,6 @@ public class Carte {
 			return String.valueOf(numero) ;
 		}
 	}
-	
 	
 	
 }
