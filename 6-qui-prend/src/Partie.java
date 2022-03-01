@@ -1,12 +1,13 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Partie {
 	public static final int NB_SERIE = 4;
-	//static List<Carte> cartes_posees = new ArrayList<Carte>();
+	static ArrayList<Carte> cartes_posees = new ArrayList<Carte>();
 	
 	// Les joueurs participant à la partie
 	Joueur[] joueurs;
@@ -164,22 +165,60 @@ public class Partie {
 			}
 			System.out.println(this.getJoueurs(i).toString1());
 			Carte carteChoisie = this.getJoueurs(i).choisirCarte();
+			cartes_posees.add(carteChoisie);
 			
-			if(!this.placerCarte(carteChoisie, this.getJoueurs(i))) {
-				Serie serie = this.getJoueurs(i).choisirSerie();
-			}
-			Console.clearScreen();
+//			if(!this.placerCarte(carteChoisie, this.getJoueurs(i))) {
+//				Serie serie = this.getJoueurs(i).choisirSerie();
+//			}
+//			Console.clearScreen();
 		}
 		
-//		 A continuer
-//		System.out.println(Partie.cartes_posees);
-//		
-//		System.out.println("Les cartes ");
-//		for(int i = 0; i < joueurs.length; i++) {
-//			System.out.println();
-//		}
-//	
-//		
+		trie(cartes_posees);
+		System.out.print("Les cartes ");
+		int nb = 0;
+		for(int i = 0; i < this.nbJoueur(); i++) {
+			System.out.print(cartes_posees.get(i));
+			for(int j = 0; j < this.nbJoueur(); j++) {
+				if(this.joueurs[j].aCarte(cartes_posees.get(i).getNumero()) == true) {
+					
+					System.out.print(" (" +this.joueurs[j].getNom() + ")");
+					
+					if(nb < this.nbJoueur() -1){
+						System.out.print(", ");
+						nb++;
+					}
+//					if(nb == this.nbJoueur()-1) {
+					else {
+						System.out.print(" et ");
+						nb++;
+					}
+				}
+				
+			}
+			
+			
+		}
+		System.out.print("vont être posées.");
+
+	
+	}
+	
+	// Trie les cartes choisit par le joueurs oar ordre croissant
+	public void trie(ArrayList<Carte> carte) {
+		
+		Carte tmp = new Carte(0);
+		
+		for(int i = 0; i < (carte.size()-1); i++) {
+			for(int j = i+1; j < carte.size(); j++ ) {
+				if(carte.get(i).getNumero() > carte.get(j).getNumero()) {
+					tmp = carte.get(i);
+					carte.set(i,carte.get(j));
+					carte.set(j, tmp);
+				}
+			}
+	
+		}
+		
 	}
 	
 	/**

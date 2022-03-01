@@ -18,6 +18,7 @@ public class Joueur {
 	private static int numerocpt = 1;
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
 	private int nbTete;
+	private List<Carte> cartes_jouees = new ArrayList<Carte>();
 	
 	/**
 	 * Constructeur pour initialiser un joueur. <br>
@@ -79,6 +80,16 @@ public class Joueur {
 	public void prendCarte(Carte carte) {
 		cartes.add(carte);
 	}
+	
+	public boolean aCarte(int valeur) {
+		for(int i = 0; i < cartes_jouees.size(); i++) {
+			if(cartes_jouees.get(i)!= null && cartes_jouees.get(i).getNumero() == valeur) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	/**
 	 * Choix d'une carte par le joueur parmi les cartes de sa main.
@@ -87,6 +98,7 @@ public class Joueur {
 	public Carte choisirCarte() {
 		int indice = -1;
 		System.out.print("Saisissez votre choix : ");
+		
 		
 		Carte carteChoisie=null;
 		do {
@@ -101,6 +113,8 @@ public class Joueur {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
+		Console.clearScreen();
+		cartes_jouees.add(carteChoisie);
 		return carteChoisie;
 	}
 	

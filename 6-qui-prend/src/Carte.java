@@ -13,6 +13,10 @@ public class Carte {
 		this.numero = numerocpt++;
 		this.nbTete = initNbTete(this.numero);
 	}
+	public Carte(int valeur) {
+		this.numero = valeur;
+		this.nbTete = valeur;
+	}
 	
 	
 	private int initNbTete(int numero) {
