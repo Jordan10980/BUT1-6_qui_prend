@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Carte {
+public class Carte implements Comparable {
 	private int numero;
 	private int nbTete;
 	private static int numerocpt = 1;
@@ -63,5 +63,8 @@ public class Carte {
 		}
 	}
 	
-	
+	@Override
+	public int compareTo(Object o) {
+		return this.getNumero() - ((Carte) o).getNumero();
+	}
 }
