@@ -216,7 +216,6 @@ public class Partie {
 			int tete = ((Integer) mapentry.getValue());
 			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs.");
 		}
-			
 		
 }
 	
