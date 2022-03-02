@@ -19,6 +19,7 @@ public class Joueur {
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
 	private int nbTete;
 	private List<Carte> cartes_jouees = new ArrayList<Carte>();
+	private List<Carte> cartes_ramassees = new ArrayList<Carte>();
 	
 	/**
 	 * Constructeur pour initialiser un joueur. <br>
@@ -81,6 +82,10 @@ public class Joueur {
 		cartes.add(carte);
 	}
 	
+	public void prendSerie(Carte carte) {
+		cartes_ramassees.add(carte);
+	}
+	
 	public boolean aCarte(int valeur) {
 		for(int i = 0; i < cartes_jouees.size(); i++) {
 			if(cartes_jouees.get(i)!= null && cartes_jouees.get(i).getNumero() == valeur) {
@@ -100,7 +105,7 @@ public class Joueur {
 		System.out.print("Saisissez votre choix : ");
 		
 		
-		Carte carteChoisie=null;
+		Carte carteChoisie = null;
 		do {
 			Scanner sc = new Scanner(System.in);
 			String rep = sc.next();
@@ -113,7 +118,6 @@ public class Joueur {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
-		Console.clearScreen();
 		cartes_jouees.add(carteChoisie);
 		return carteChoisie;
 	}
@@ -128,16 +132,11 @@ public class Joueur {
 		return -1;
 	}
 	
-	
 	public void ajouterTete (int nbTete){
 		this.nbTete += nbTete;
 	}
 
-	public Serie choisirSerie() {
-		// à faire
-		return null;
-	}
-	
+
 }
 
 	

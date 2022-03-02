@@ -167,14 +167,12 @@ public class Partie {
 			}
 			System.out.println(this.getJoueurs(i).toString1());
 			Carte carteChoisie = this.getJoueurs(i).choisirCarte();
-//			cartes_posees.add(carteChoisie);
 			cartePosees.put(carteChoisie, this.getJoueurs(i));
 //			if(!this.placerCarte(carteChoisie, this.getJoueurs(i))) {
 //			Serie serie = this.getJoueurs(i).choisirSerie();
 //		}
 		Console.clearScreen();
 		}
-//		trie
 		System.out.print("Les cartes ");
 		
 		int i=0;
@@ -194,52 +192,19 @@ public class Partie {
         }
 		System.out.println(" vont être posées.");
 		
+		
         for (Map.Entry mapentry2 : cartePosees.entrySet()) {
         	Carte carte = ((Carte) mapentry2.getKey());
         	Joueur joueur = ((Joueur)mapentry2.getValue());
         	if(!this.placerCarte(carte, joueur)) {
-        		Serie serie = joueur.choisirSerie();
+        		Serie serie = choisirSerie(carte, joueur);  // condition 4
         	}
         }
+        
 		for(int j = 0; j < Partie.NB_SERIE; j++) {
 			System.out.println(this.getSeries(j));
 		}
-        
-//		for(int i = 0; i < cartesPosees.size(); i++) {
-//			if(i > 0){
-//				if(i < cartes_posees.size()-1) {
-//					System.out.print(", ");
-//				} else {
-//					System.out.print(" et ");
-//				}
-//			}
-//			System.out.print(cartes_posees.get(i));
-//			for(int j = 0; j < this.nbJoueur(); j++) {
-//				if(this.joueurs[j].aCarte(cartes_posees.get(i).getNumero()) == true) {
-//					System.out.print(" (" +this.joueurs[j].getNom() + ")");
-//				}
-//			}
-//		}
-//		System.out.print(" vont être posées.");
 }
-	
-	// Trie les cartes choisit par le joueurs oar ordre croissant
-//	public void trie(ArrayList<Carte> carte) {
-//		
-//		Carte tmp = new Carte(0);
-//		
-//		for(int i = 0; i < (carte.size()-1); i++) {
-//			for(int j = i+1; j < carte.size(); j++ ) {
-//				if(carte.get(i).getNumero() > carte.get(j).getNumero()) {
-//					tmp = carte.get(i);
-//					carte.set(i,carte.get(j));
-//					carte.set(j, tmp);
-//				}
-//			}
-//	
-//		}
-//		
-//	}
 	
 	/**
 	 * Place une carte sur l'une des séries selon les règles définies par le jeu 6-qui-prend.<BR>
@@ -251,7 +216,7 @@ public class Partie {
 		for(int i = 0; i < Partie.NB_SERIE; i++) {
 			Serie serie = series[i];
 			Carte derniereCarte = serie.derniereCarte();
-			if(carteAPlacer.getNumero() > derniereCarte.getNumero()) {
+			if(carteAPlacer.getNumero() > derniereCarte.getNumero()) {  // condition 1
 				if(indiceSerieTrouvee != -1) {
 					if(derniereCarte.getNumero() > series[indiceSerieTrouvee].derniereCarte().getNumero()) {
 						indiceSerieTrouvee = i;
@@ -267,14 +232,56 @@ public class Partie {
 			return false;
 		}
 		else {
-			if(series[indiceSerieTrouvee].estPleine()) {
+			if(series[indiceSerieTrouvee].estPleine()) { // Condition 3
 				int nbTete = series[indiceSerieTrouvee].nbTete();
-				joueur.ajouterTete(nbTete);
-				Serie serie = new Serie();
-				series[indiceSerieTrouvee] = serie;
+				series[indiceSerieTrouvee].vider(joueur);
+				
+//				joueur.ajouterTete(nbTete);
+//				Serie serie = new Serie();
+//				series[indiceSerieTrouvee] = serie;
 			}
 			series[indiceSerieTrouvee].ajouterCarte(carteAPlacer);
 			return true;	
 		}
 	}
+	
+	
+	
+	
+	public Serie choisirSerie(Carte carte, Joueur joueur) {
+		System.out.println("Pour poser la carte " + carte +", " + joueur + " doit choir la série qu'il va ramasser." );
+		for(int i = 0; i < Partie.NB_SERIE; i++) {
+			System.out.println(this.getSeries(i));
+		}
+		
+		int indice = -1;
+		System.out.print("Saisissez votre choix : ");
+		
+		
+		Serie serieChoisie = null;
+		do {
+			Scanner sc = new Scanner(System.in);
+			String rep = sc.next();
+			indice = serieExiste(Integer.valueOf(rep));
+			if(indice != -1) {
+				series[indice].vider(joueur);
+				series[0].ajouterCarte(carte);
+			}
+			else{
+				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
+			}
+		} while(indice == -1);
+		return serieChoisie;
+	}
+	
+	private int serieExiste(int valeur) {
+		for(int i = 0; i < Partie.NB_SERIE; i++) {
+			if(valeur == series[i].getNumero())
+				return i;
+		}
+		
+		return -1;
+	}
+
+	
 }

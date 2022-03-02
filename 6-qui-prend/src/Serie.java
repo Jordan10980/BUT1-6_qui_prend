@@ -64,4 +64,11 @@ public class Serie {
 		return somme;
 	}
 	
+	public void vider(Joueur joueur) {
+		while(cartesSerie.size() != 0) {
+			Carte carte = cartesSerie.remove(0);
+			joueur.prendSerie(carte);
+		}
+	}
+	
 }
