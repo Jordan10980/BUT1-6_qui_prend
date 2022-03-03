@@ -159,13 +159,13 @@ public class Partie {
 	 * 
 	 */
 	
-	private static Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
+	private Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 	public void demarrer() {
 //		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 		appelJoueur();
 		affichageCartesAJouer();
 		poserLesCartes();
-        affichageCartesAJouer();
+		affichageCartesAJouer(); // ATTENTION BUG sa l'affiche 2 fois lorsque les cartes sont mises automatiquement dans les séries
         affichageSerie();
         affichageScoreTour();
 }
@@ -222,6 +222,7 @@ public class Partie {
 		        teteParJoueur.put(joueur, nbTete);
         	}
         }
+
 	}
 	
 	public void affichageSerie() {
