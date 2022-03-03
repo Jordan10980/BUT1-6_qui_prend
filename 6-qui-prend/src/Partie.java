@@ -158,8 +158,19 @@ public class Partie {
 	 * Démarre une partie préalablement créée/initialisée avec l'ensemble des joueurs (et leur main) et des séries.
 	 * 
 	 */
+	
+	private static Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 	public void demarrer() {
-		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
+//		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
+		appelJoueur();
+		affichageCartesAJouer();
+		poserLesCartes();
+        affichageCartesAJouer();
+        affichageSerie();
+        affichageScoreTour();
+}
+	
+	public void appelJoueur() {
 //		 permet aux joueurs de choisir leurs cartes
 		for(int i = 0; i< this.nbJoueur(); i++) {
 			System.out.println("A " + this.getJoueurs(i).getNom() + " de jouer.");
@@ -175,8 +186,11 @@ public class Partie {
 //		}
 		Console.clearScreen();
 		}
-		System.out.print("Les cartes ");
+	}
 		
+	
+	public void affichageCartesAJouer() {
+		System.out.print("Les cartes ");
 		int i=0;
         for (Map.Entry mapentry : cartePosees.entrySet()) {
         	int num = ((Carte) mapentry.getKey()).getNumero();
@@ -193,9 +207,11 @@ public class Partie {
 			i++;	
         }
 		System.out.println(" vont être posées.");
-		
-		
-        for (Map.Entry mapentry : cartePosees.entrySet()) {
+	}
+	
+	
+	public void poserLesCartes() {
+	   for (Map.Entry mapentry : cartePosees.entrySet()) {
         	Carte carte = ((Carte) mapentry.getKey());
         	Joueur joueur = ((Joueur)mapentry.getValue());
         	if(!this.placerCarte(carte, joueur, teteParJoueur)) {
@@ -206,18 +222,23 @@ public class Partie {
 		        teteParJoueur.put(joueur, nbTete);
         	}
         }
-        
+	}
+	
+	public void affichageSerie() {
 		for(int j = 0; j < Partie.NB_SERIE; j++) {
 			System.out.println(this.getSeries(j));
 		}
 		
+	}
+	
+	public void affichageScoreTour() {
 		for (Map.Entry mapentry : teteParJoueur.entrySet()) {
 			String nom = ((Joueur) mapentry.getKey()).getNom();
 			int tete = ((Integer) mapentry.getValue());
-			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs.");
+			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
 		}
-		
-}
+	}
+	
 	
 	/**
 	 * Place une carte sur l'une des séries selon les règles définies par le jeu 6-qui-prend.<BR>
@@ -259,7 +280,7 @@ public class Partie {
 	
 	
 	public Serie choisirSerie(Carte carte, Joueur joueur) {
-		System.out.println("Pour poser la carte " + carte +", " + joueur + " doit choir la série qu'il va ramasser." );
+		System.out.println("Pour poser la carte " + carte +", " + joueur.getNom() + " doit choisir la série qu'il va ramasser." );
 		for(int i = 0; i < Partie.NB_SERIE; i++) {
 			System.out.println(this.getSeries(i));
 		}
