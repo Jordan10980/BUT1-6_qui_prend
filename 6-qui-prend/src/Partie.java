@@ -160,13 +160,12 @@ public class Partie {
 	 */
 	
 	private Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
+	
 	public void demarrer() {
-//		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 		appelJoueur();
 		affichageCartesAJouer();
 		poserLesCartes();
-		affichageCartesAJouer(); // ATTENTION BUG sa l'affiche 2 fois lorsque les cartes sont mises automatiquement dans les séries
-        affichageSerie();
+		affichageSerie();
         affichageScoreTour();
 }
 	
@@ -207,6 +206,7 @@ public class Partie {
 			i++;	
         }
 		System.out.println(" vont être posées.");
+		
 	}
 	
 	
@@ -220,12 +220,17 @@ public class Partie {
 				serie.vider(joueur);
 				serie.ajouterCarte(carte);
 		        teteParJoueur.put(joueur, nbTete);
+		        
         	}
         }
-
+	   
 	}
 	
-	public void affichageSerie() {
+	public void affichagePoserCartes() {
+		System.out.println("Pour poser la carte " + cartePosees.firstKey() +", " + cartePosees.get(cartePosees.firstKey()).getNom() + " doit choisir la série qu'il va ramasser." );
+	}
+
+	public void affichageSerie() {	
 		for(int j = 0; j < Partie.NB_SERIE; j++) {
 			System.out.println(this.getSeries(j));
 		}
@@ -275,9 +280,8 @@ public class Partie {
 			series[indiceSerieTrouvee].ajouterCarte(carteAPlacer);
 			return true;	
 		}
+		
 	}
-	
-	
 	
 	
 	public Serie choisirSerie(Carte carte, Joueur joueur) {
@@ -302,7 +306,9 @@ public class Partie {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
+		affichageCartesAJouer();
 		return serieChoisie;
+		
 	}
 	
 	private int serieExiste(int valeur) {
@@ -313,6 +319,6 @@ public class Partie {
 		
 		return -1;
 	}
-
+	
 	
 }
