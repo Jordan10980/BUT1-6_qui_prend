@@ -9,8 +9,6 @@ import java.util.TreeMap;
 
 public class Partie {
 	public static final int NB_SERIE = 4;
-	//static ArrayList<Carte> cartes_posees = new ArrayList<Carte>();
-//	private TreeMap<Carte, Joueur> cartePosees = new TreeMap<Carte, Joueur>();
 	
 	// Les joueurs participant à la partie
 	Joueur[] joueurs;
@@ -20,7 +18,6 @@ public class Partie {
 	
 	// Les différentes séries "en cours" utilisées durant la partie
 	Serie[] series;
-	
 
 	public Joueur getJoueurs(int indice) {
 		return joueurs[indice];
@@ -87,7 +84,6 @@ public class Partie {
 		return serie;
 	}
 
-
 	/**
 	 * Récupère un nouveau paquet de carte complet pour jouer à 6-qui-prend<BR>
 	 * Le paquet de carte récupéré est déjà mélangé et prêt à être distribué.
@@ -148,7 +144,6 @@ public class Partie {
 		
 		return listeNomJoueurs;
 	}
-
 	
 	/**
 	 * Démarre une partie préalablement créée/initialisée avec l'ensemble des joueurs (et leur main) et des séries.
@@ -158,10 +153,9 @@ public class Partie {
 		// Les cartes posées pendant le tour avec le joueur associé
 		Map<Carte, Joueur> carteAPoser = new TreeMap<Carte, Joueur>();
 
-		// Les têtes rammasées pendant le tour avec le joueur associé
+		// Les têtes rammassées pendant le tour avec le joueur associé
 		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 
-		
 		// On boucle tant que le jeu n'est pas terminé
 		while(!finJeu()) {
 
@@ -252,7 +246,6 @@ public class Partie {
         	if(!placerCarte(carte, joueur, teteParJoueur)) {
         		Serie serie = choisirSerie(carte, joueur);  // condition 4
         		int nbTete = serie.nbTete();
-        		System.out.println("nbTete rammassées : " + nbTete);
 				serie.vider(joueur);
 				serie.ajouterCarte(carte);
 		        teteParJoueur.put(joueur, nbTete);

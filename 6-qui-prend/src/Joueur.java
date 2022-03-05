@@ -17,7 +17,6 @@ public class Joueur {
 	private int numero;
 	private static int numerocpt = 1;
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
-//	private List<Carte> cartes_jouees = new ArrayList<Carte>();
 	private List<Carte> cartesRamassees = new ArrayList<Carte>();
 	
 	/**
@@ -110,7 +109,6 @@ public class Joueur {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
-//		cartes_jouees.add(carteChoisie);
 		return carteChoisie;
 	}
 	
@@ -130,7 +128,7 @@ public class Joueur {
 	
 	/**
 	 * Calcule et renvoie le nombre de tête du joueur.<BR>
-	 * Le calcul se base sur la liste des carte rammasée par le joueur depuis le début de la partie.
+	 * Le calcul se base sur la liste des cartes rammasssées par le joueur depuis le début de la partie.
 	 * 
 	 * @return le nombre de tête du joueur
 	 */
