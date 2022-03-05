@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Serie {
 	private static final int maxCartesSerie = 5;
-//	private static Carte[] cartesSerie = new Carte[5]; 
 	private int numero;
 	private static int numerocpt = 1;
 	private List<Carte> cartesSerie = new ArrayList(5);
@@ -15,7 +14,6 @@ public class Serie {
 	
 	public Serie(Carte c) {
 		this.numero = numerocpt++;
-		//this.cartesSerie = cartesSerie;
 	}
 	
 
@@ -38,10 +36,6 @@ public class Serie {
 	public int getNumero() {
 		return numero;
 	}
-	
-//	public void setCarte(Carte c, int indice) {
-//		cartesSerie.add(c);
-//	}
 	
 	public Carte derniereCarte() {
 		int i = cartesSerie.size();

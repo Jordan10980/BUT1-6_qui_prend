@@ -17,7 +17,7 @@ public class Joueur {
 	private int numero;
 	private static int numerocpt = 1;
 	private List<Carte> cartes = new ArrayList<Carte>(); // la main du joueur
-	private List<Carte> cartes_jouees = new ArrayList<Carte>();
+//	private List<Carte> cartes_jouees = new ArrayList<Carte>();
 	private List<Carte> cartesRamassees = new ArrayList<Carte>();
 	
 	/**
@@ -35,7 +35,11 @@ public class Joueur {
 		return "Joueur " + numero + "[nom=" + nom + "]" +" Cartes : "+ cartes;
 	}
 
-	public String toString1() { // Affichages des cartes du joueurs
+	/**
+	 * Affiche la main du joueur, c'est à dire l'ensemble des cartes qu'il possède dans sa main.
+	 * 
+	 */
+	public void afficherMain() { 
 		String chaine = "- Vos cartes : ";
 		boolean first = true;
 		for(Carte c : cartes) {
@@ -45,7 +49,7 @@ public class Joueur {
 				first = false;
 			chaine += c ;
 		}
-		return chaine;
+		System.out.println(chaine);
 	}
 
 	/**
@@ -106,7 +110,7 @@ public class Joueur {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
-		cartes_jouees.add(carteChoisie);
+//		cartes_jouees.add(carteChoisie);
 		return carteChoisie;
 	}
 	
@@ -122,6 +126,20 @@ public class Joueur {
 	
 	public boolean mainVide() {
 		return cartes.size() == 0;
+	}
+	
+	/**
+	 * Calcule et renvoie le nombre de tête du joueur.<BR>
+	 * Le calcul se base sur la liste des carte rammasée par le joueur depuis le début de la partie.
+	 * 
+	 * @return le nombre de tête du joueur
+	 */
+	public int getNbTete() {
+		int nbTete = 0;
+		for(Carte carte : cartesRamassees) {
+			nbTete += carte.getNbTete();
+		}
+		return nbTete;
 	}
 }
 

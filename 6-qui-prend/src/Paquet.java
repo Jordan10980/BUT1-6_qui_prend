@@ -29,26 +29,11 @@ public class Paquet {
 			Carte carte = cartes.remove(0);
 			joueur.prendCarte(carte);
 		}
-
-//		for(int i = 0; i < nb_cartes_joueur; i++) {
-//			joueur.setCarte(cartes.get(i), i);
-//			
-//		}
-//		SupprimerCartes();
-		
 	}
-	
-//	public void SupprimerCartes() {
-//		for(int i = 0; i < nb_cartes_joueur; i++) {
-//			cartes.remove(0);
-//		}
-//	}
 	
 	public void distributionSeries(Serie serie) {
 		serie.ajouterCarte(cartes.remove(0));
 	}
-	
-
 
 	public void afficherCartes() {
 		System.out.println("Contenu du paquet de carte:\n" + this.cartes + "\n");

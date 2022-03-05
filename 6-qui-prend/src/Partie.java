@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class Partie {
 	public static final int NB_SERIE = 4;
 	//static ArrayList<Carte> cartes_posees = new ArrayList<Carte>();
-	private TreeMap<Carte, Joueur> cartePosees = new TreeMap<Carte, Joueur>();
+//	private TreeMap<Carte, Joueur> cartePosees = new TreeMap<Carte, Joueur>();
 	
 	// Les joueurs participant à la partie
 	Joueur[] joueurs;
@@ -108,14 +108,10 @@ public class Partie {
 	private Joueur[] initialiserJoueur() {
 
 		List<String> listeNomJoueurs = lireNomJoueur();
-//		System.out.println(listeNomJoueurs); // Liste des joueurs
-//		System.out.println(listeNomJoueurs.get(0));
-//		System.out.println("Il y a " + listeNomJoueurs.size() + " joueurs"); // Nombre de joueurs
 
 		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
 		for (int i = 0; i < listeNomJoueurs.size() ; i++) {
 			joueurs[i] = new Joueur(listeNomJoueurs.get(i));
-//			System.out.println(joueurs[i]); Pour vérifier que les Joueuers ont des numéros et des noms différents
 		}
 
 		System.out.print("Les " + joueurs.length  + " joueurs sont ");
@@ -158,56 +154,76 @@ public class Partie {
 	 * Démarre une partie préalablement créée/initialisée avec l'ensemble des joueurs (et leur main) et des séries.
 	 * 
 	 */
-	
-	private Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
-	
 	public void demarrer() {
-		while(finJeu() != true) {
-			appelJoueur();
-			affichageCartesAJouer();
-			poserLesCartes();
+		// Les cartes posées pendant le tour avec le joueur associé
+		Map<Carte, Joueur> carteAPoser = new TreeMap<Carte, Joueur>();
+
+		// Les têtes rammasées pendant le tour avec le joueur associé
+		Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
+
+		
+		// On boucle tant que le jeu n'est pas terminé
+		while(!finJeu()) {
+
+			// On appelle les joueurs un par un pour qu'ils choisissent une carte à poser
+			appelJoueur(carteAPoser);
+			// On affiche les cartes à poser choisies par tous les joueurs
+			affichageCarteAPoser(carteAPoser);
+			// On pose les cartes dans les séries
+			poserLesCartes(carteAPoser, teteParJoueur);
+			// Une fois les cartes posées, on affiche les séries mises à jour
 			affichageSerie();
-	        if(!affichageScoreTour()) {
+			// On affiche les scores (nombre de tête récupéré par les joueurs) pour le tour en cours
+			if(!affichageScoreTour(teteParJoueur)) {
 	        	System.out.println("Aucun joueur ne ramasse de tête de boeufs.");
 	        }
-	        
-	        
-	        // Je pense à chaque tour on doit réinitialiser les cartes posées par chaque joueur
-	        
+			// On réinitialise les Map de cartes posées et de nombre de têtes ramassées pendant le tour
+			teteParJoueur.clear();
+			carteAPoser.clear();
 		}
 		
+		// Une fois la partie finie, on affiche le score final de la partie
 		affichageFinal();
-		
-		
-}
+	}
 	
-	public void appelJoueur() {
-//		 permet aux joueurs de choisir leurs cartes
+	/**
+	 * Appel des joueurs un par un pour qu'ils choisissent une carte à poser
+	 */
+	public void appelJoueur(Map<Carte, Joueur> carteAPoser) {
+		// On boucle sur tous les joueurs
 		for(int i = 0; i< this.nbJoueur(); i++) {
-			System.out.println("A " + this.getJoueurs(i).getNom() + " de jouer.");
-			Console.pause();
-			for(int j = 0; j < Partie.NB_SERIE; j++) {
-				System.out.println(this.getSeries(j));
+			Joueur joueur = this.getJoueurs(i);
+
+			// Le joueur joue le tour si sa main n'est pas vide
+			if(!joueur.mainVide()) {
+				System.out.println("A " + joueur.getNom() + " de jouer.");
+				Console.pause();
+
+				// On affiche les séries au joueur
+				affichageSerie();
+				// On affiche sa main
+				joueur.afficherMain();
+				// On lui demande de choisir ue carte de sa main
+				Carte carteChoisie = joueur.choisirCarte();
+				// On sauvegarde la carte choisie pour le tour en cours
+				carteAPoser.put(carteChoisie, joueur);
+
+				Console.clearScreen();
 			}
-			System.out.println(this.getJoueurs(i).toString1());
-			Carte carteChoisie = this.getJoueurs(i).choisirCarte();
-			cartePosees.put(carteChoisie, this.getJoueurs(i));
-//			if(!this.placerCarte(carteChoisie, this.getJoueurs(i))) {
-//			Serie serie = this.getJoueurs(i).choisirSerie();
-//		}
-		Console.clearScreen();
 		}
 	}
 		
-	
-	public void affichageCartesAJouer() {
+	/**
+	 * affichage des cartes a poser choisie par tous les joueurs durant le tour en cours.
+	 */
+	public void affichageCarteAPoser(Map<Carte, Joueur> carteAPoser) {
 		System.out.print("Les cartes ");
 		int i=0;
-        for (Map.Entry mapentry : cartePosees.entrySet()) {
+        for (Map.Entry mapentry : carteAPoser.entrySet()) {
         	int num = ((Carte) mapentry.getKey()).getNumero();
         	String nom = ((Joueur)mapentry.getValue()).getNom();
 			if(i > 0){
-				if(i < cartePosees.size()-1) {
+				if(i < carteAPoser.size()-1) {
 					System.out.print(", ");
 				} 
 				else {
@@ -218,59 +234,72 @@ public class Partie {
 			i++;	
         }
 		System.out.println(" vont être posées.");
-		
 	}
 	
-	
-	public void poserLesCartes() {
-	   for (Map.Entry mapentry : cartePosees.entrySet()) {
+	/**
+	 * Pose des cartes dans les séries en suivant les conditions du jeu à savoir:
+	 * <LI> Condition 1: Les cartes d'une même série sont toujours de valeurs croissante
+	 * <LI> Condition 2: Une carte doit toujours être deposée dans la série où la différence entre sa valeur et celle de la dernière carte de la série est la plus faible.
+	 * <LI> Condition 3: Lorsqu'une sixième carte doit être deposee dans une serie, le joueur ramasse les 5 cartes de la serie
+	 * <LI> Condition 4: Un joueur ayant une carte trop faible pour être déposé dans un série, choisit une série et la rammasse. Sa carte débute une nouvelle série 
+	 * 
+	 * @param teteParJoueur : les têtes récupérées par les joueurs durant le tour
+	 */
+	public void poserLesCartes(Map<Carte, Joueur> carteAPoser, Map<Joueur, Integer> teteParJoueur) {
+	   for (Map.Entry mapentry : carteAPoser.entrySet()) {
         	Carte carte = ((Carte) mapentry.getKey());
         	Joueur joueur = ((Joueur)mapentry.getValue());
-        	if(!this.placerCarte(carte, joueur, teteParJoueur)) {
+        	if(!placerCarte(carte, joueur, teteParJoueur)) {
         		Serie serie = choisirSerie(carte, joueur);  // condition 4
         		int nbTete = serie.nbTete();
+        		System.out.println("nbTete rammassées : " + nbTete);
 				serie.vider(joueur);
 				serie.ajouterCarte(carte);
 		        teteParJoueur.put(joueur, nbTete);
-		        
         	}
         }
 	   
 	}
 	
-	public void affichagePoserCartes() {
-		System.out.println("Pour poser la carte " + cartePosees.firstKey() +", " + cartePosees.get(cartePosees.firstKey()).getNom() + " doit choisir la série qu'il va ramasser." );
-	}
-
 	public void affichageSerie() {	
 		for(int j = 0; j < Partie.NB_SERIE; j++) {
 			System.out.println(this.getSeries(j));
 		}
-		
 	}
 	
-	public boolean affichageScoreTour() {
-			for (Map.Entry mapentry : teteParJoueur.entrySet()) {
-				String nom = ((Joueur) mapentry.getKey()).getNom();
-				int tete = ((Integer) mapentry.getValue());
-				System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
-				return true;
-			}
-			return false;
+	public boolean affichageScoreTour(Map<Joueur, Integer> teteParJoueur) {
+		boolean teteRamassee=false;
+		for (Map.Entry mapentry : teteParJoueur.entrySet()) {
+			String nom = ((Joueur) mapentry.getKey()).getNom();
+			int tete = ((Integer) mapentry.getValue());
+			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
+			teteRamassee=true;
+		}
+		return teteRamassee;
 	}
 	
 	
 	/**
 	 * Place une carte sur l'une des séries selon les règles définies par le jeu 6-qui-prend.<BR>
 	 * La carte est ajoutée à la liste de carte de la série.
-	 * @param carteAPlacer : la carte à placer sur la bonne série
+	 * Le placement de la carte dans une série peut engendré le ramassage des cartes par le joeur (selon les conditions du jeu).
+	 * Si la carte ne peut pas être automatiquement placée dans une série, aucune série n'est modifié.
+	 * 
+	 * @param carteAPlacer : la carte à placer dans la bonne série
+	 * @param joueur : le joueur ayant poasé la carte 
+	 * @param teteParJoueur : les têtes récupérées par l'ensemble des joueurs durant le tour (éventuellement mis à jour si le joueur rammasse des cartes d'une série en posant sa carte)
+	 * @return vrai si la carte a pu être posée dans une série, faux sinon
 	 */
 	public boolean placerCarte(Carte carteAPlacer, Joueur joueur, Map<Joueur, Integer> teteParJoueur) {
 		int indiceSerieTrouvee = -1;
 		for(int i = 0; i < Partie.NB_SERIE; i++) {
 			Serie serie = series[i];
+			// On récupère la dernière carte d'une série
 			Carte derniereCarte = serie.derniereCarte();
-			if(carteAPlacer.getNumero() > derniereCarte.getNumero()) {  // condition 1
+
+			// Condition1 : On trouve une série dont la valeur de la dernière carte est inférieure à celle de la carte à poser
+			if(carteAPlacer.getNumero() > derniereCarte.getNumero()) { 
+				// Condition2 : Si on avait déjà trouvé une série compatible avec la condition1, on regarde si la série actuelle est plus pertinente (dernière carte plus proche de la carte à poser) que celle déjà trouvée
 				if(indiceSerieTrouvee != -1) {
 					if(derniereCarte.getNumero() > series[indiceSerieTrouvee].derniereCarte().getNumero()) { //condition 2
 						indiceSerieTrouvee = i;
@@ -286,28 +315,35 @@ public class Partie {
 			return false;
 		}
 		else {
+			//Condition3: Si la série est pleine alors on la vide (transfert des cartes de la série vers le tas de cartes rammassées par le joueur)
 			if(series[indiceSerieTrouvee].estPleine()) { // Condition 3
+				// Au passage, on met à jour le nombre de tête rammasseés par le joueur durant le tour
 				int nbTete = series[indiceSerieTrouvee].nbTete();
 				series[indiceSerieTrouvee].vider(joueur);
 				teteParJoueur.put(joueur, nbTete);
 			}
+			// Ajout de la carte à poser à la série  
 			series[indiceSerieTrouvee].ajouterCarte(carteAPlacer);
 			return true;	
 		}
 		
 	}
 	
-	
+	/**
+	 * Choix de la série que le joueur va devoir rammaser.
+	 * @param carte : la carte à poser pour le joueur qui n'a pas pu être poser automatiquement
+	 * @param joueur : le joueur ayant jouer cette carte
+	 * @return la série choisie par le joueur et dont il va devoir rammaser les cartes
+	 */
 	public Serie choisirSerie(Carte carte, Joueur joueur) {
 		System.out.println("Pour poser la carte " + carte +", " + joueur.getNom() + " doit choisir la série qu'il va ramasser." );
-		for(int i = 0; i < Partie.NB_SERIE; i++) {
-			System.out.println(this.getSeries(i));
-		}
+
+		// Affichage des séries
+		affichageSerie();
 		
-		int indice = -1;
+		// Choix de la série par l'utilisateur
 		System.out.print("Saisissez votre choix : ");
-		
-		
+		int indice = -1;
 		Serie serieChoisie = null;
 		do {
 			Scanner sc = new Scanner(System.in);
@@ -320,56 +356,46 @@ public class Partie {
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
 		} while(indice == -1);
-		affichageCartesAJouer();
+		//affichageCarteAPoser();
 		return serieChoisie;
 		
 	}
 	
+	/**
+	 * Vérifie qu'une série exsite en fonction d'un numéro.
+	 * @param valeur : le numéro de série à vérifier
+	 * @return vrai si la série existe, faux si elle n'existe pas
+	 */
 	private int serieExiste(int valeur) {
 		for(int i = 0; i < Partie.NB_SERIE; i++) {
 			if(valeur == series[i].getNumero())
 				return i;
 		}
-		
 		return -1;
 	}
 	
-	public boolean mainVideJoueur(int numero) {
-		if(joueurs[numero].mainVide() == true) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
+	/**
+	 * Détermine si la partie est finie ou pas.<BR>
+	 * La partie est finie lorsque plus aucun joueur n'a de carte dans sa main.
+	 * @return vrai si la partie est finie. Faux sinon
+	 */
 	public boolean finJeu() {
-		int total = 0;
 		for(int i = 0; i < this.nbJoueur(); i++) {
-			if(mainVideJoueur(i) == true) {
-				total++;
+			if(! joueurs[i].mainVide()) {
+				return false;
 			}
-				
 		}
-		if(total == this.nbJoueur()) {
-			return true;
-		}	
-		else {
-			return false;
-		}
+		return true;
 	}
 	
-	public void affichageFinal() { // je sais pas si elle est bonne
+	/**
+	 * Affichage  des scores finaux de tous les joueurs.<BR>
+	 * On affiche le nombre de têtes rammassées par le joueur
+	 */
+	public void affichageFinal() {
 		System.out.println("** Score final");
-		for (Map.Entry mapentry : teteParJoueur.entrySet()) {
-			String nom = ((Joueur) mapentry.getKey()).getNom();
-			int tete = ((Integer) mapentry.getValue());
-			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
+		for(Joueur joueur : joueurs) {
+			System.out.println(joueur.getNom() + " a rammassé " + joueur.getNbTete()+ " têtes de boeufs");
 		}
 	}
-	
-	
-		
-	
-	
 }
