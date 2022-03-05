@@ -119,6 +119,10 @@ public class Joueur {
 		
 		return -1;
 	}
+	
+	public boolean mainVide() {
+		return cartes.size() == 0;
+	}
 }
 
 	

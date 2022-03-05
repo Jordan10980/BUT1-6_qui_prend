@@ -162,13 +162,23 @@ public class Partie {
 	private Map<Joueur, Integer> teteParJoueur = new HashMap<Joueur, Integer>();
 	
 	public void demarrer() {
-		appelJoueur();
-		affichageCartesAJouer();
-		poserLesCartes();
-		affichageSerie();
-        if(!affichageScoreTour()) {
-        	System.out.println("Aucun joueur ne ramasse de tête de boeufs.");
-        }
+		while(finJeu() != true) {
+			appelJoueur();
+			affichageCartesAJouer();
+			poserLesCartes();
+			affichageSerie();
+	        if(!affichageScoreTour()) {
+	        	System.out.println("Aucun joueur ne ramasse de tête de boeufs.");
+	        }
+	        
+	        
+	        // Je pense à chaque tour on doit réinitialiser les cartes posées par chaque joueur
+	        
+		}
+		
+		affichageFinal();
+		
+		
 }
 	
 	public void appelJoueur() {
@@ -323,6 +333,43 @@ public class Partie {
 		
 		return -1;
 	}
+	
+	public boolean mainVideJoueur(int numero) {
+		if(joueurs[numero].mainVide() == true) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean finJeu() {
+		int total = 0;
+		for(int i = 0; i < this.nbJoueur(); i++) {
+			if(mainVideJoueur(i) == true) {
+				total++;
+			}
+				
+		}
+		if(total == this.nbJoueur()) {
+			return true;
+		}	
+		else {
+			return false;
+		}
+	}
+	
+	public void affichageFinal() { // je sais pas si elle est bonne
+		System.out.println("** Score final");
+		for (Map.Entry mapentry : teteParJoueur.entrySet()) {
+			String nom = ((Joueur) mapentry.getKey()).getNom();
+			int tete = ((Integer) mapentry.getValue());
+			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
+		}
+	}
+	
+	
+		
 	
 	
 }
