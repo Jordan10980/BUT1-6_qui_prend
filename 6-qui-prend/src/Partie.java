@@ -166,7 +166,9 @@ public class Partie {
 		affichageCartesAJouer();
 		poserLesCartes();
 		affichageSerie();
-        affichageScoreTour();
+        if(!affichageScoreTour()) {
+        	System.out.println("Aucun joueur ne ramasse de tête de boeufs.");
+        }
 }
 	
 	public void appelJoueur() {
@@ -237,12 +239,14 @@ public class Partie {
 		
 	}
 	
-	public void affichageScoreTour() {
-		for (Map.Entry mapentry : teteParJoueur.entrySet()) {
-			String nom = ((Joueur) mapentry.getKey()).getNom();
-			int tete = ((Integer) mapentry.getValue());
-			System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
-		}
+	public boolean affichageScoreTour() {
+			for (Map.Entry mapentry : teteParJoueur.entrySet()) {
+				String nom = ((Joueur) mapentry.getKey()).getNom();
+				int tete = ((Integer) mapentry.getValue());
+				System.out.println(nom + " a rammassé " + tete + " têtes de boeufs");
+				return true;
+			}
+			return false;
 	}
 	
 	
