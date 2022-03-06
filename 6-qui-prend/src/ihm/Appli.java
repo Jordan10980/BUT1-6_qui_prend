@@ -1,3 +1,6 @@
+package ihm;
+import game.Partie;
+
 /**
  * 
  * @author iPrisc & Jordan10980
@@ -17,6 +20,8 @@ public class Appli {
 		
 		// Démarrage du jeu....
 		partie.demarrer();
+		
+		// possibilité de Jouer plusieurs manches en accumulant les pts de chaque manche.
 		
 		
 	}

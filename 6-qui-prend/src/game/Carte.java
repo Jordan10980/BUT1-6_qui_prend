@@ -1,3 +1,4 @@
+package game;
 public class Carte implements Comparable {
 	private int numero;
 	private int nbTete;

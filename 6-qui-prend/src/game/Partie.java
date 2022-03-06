@@ -1,3 +1,4 @@
+package game;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -127,7 +128,8 @@ public class Partie {
 	 * @return la liste des nom de joueur
 	 */
 	private List<String> lireNomJoueur() {
-
+		
+		int count = 0;
 		final String nomFichierJoueur = "config.txt";
 		List<String> listeNomJoueurs = new ArrayList<String>();
 		try {
@@ -135,6 +137,7 @@ public class Partie {
 			Scanner in = new Scanner(new FileInputStream(nomFichierJoueur));
 			while (in.hasNextLine()) {
 				listeNomJoueurs.add(in.nextLine());
+				count++;
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -142,6 +145,10 @@ public class Partie {
 			System.out.println("La partie ne peux donc pas commencer...");
 			throw new RuntimeException(e);
 		}
+		
+		//faire une assertions pour voir si count est supérieur ou égale à 2
+		assert count >= 2; //sa marche pas ça
+		assert count <= 10;
 		
 		return listeNomJoueurs;
 	}
@@ -387,7 +394,7 @@ public class Partie {
 	 * Affichage  des scores finaux de tous les joueurs.<BR>
 	 * On affiche le nombre de têtes rammassées par le joueur
 	 */
-	public void affichageFinal() {
+	public void affichageFinal() { 
 		ArrayList<Integer> teteTmp = new ArrayList();
 		
 		System.out.println("** Score final");
@@ -405,6 +412,8 @@ public class Partie {
 			}
 			
 		}
+		
+		// si les joueurs ont le même nombre de têtes de boeufs on les tries par odre alphabétique
 		
 	
 	}
