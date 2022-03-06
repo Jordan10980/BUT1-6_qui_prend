@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,6 +250,7 @@ public class Partie {
 				serie.vider(joueur);
 				serie.ajouterCarte(carte);
 		        teteParJoueur.put(joueur, nbTete);
+		        affichageCarteAPoser(carteAPoser);
         	}
         }
 	   
@@ -386,9 +388,25 @@ public class Partie {
 	 * On affiche le nombre de têtes rammassées par le joueur
 	 */
 	public void affichageFinal() {
+		ArrayList<Integer> teteTmp = new ArrayList();
+		
 		System.out.println("** Score final");
-		for(Joueur joueur : joueurs) {
-			System.out.println(joueur.getNom() + " a rammassé " + joueur.getNbTete()+ " têtes de boeufs");
+		
+		for(int i = 0; i < this.nbJoueur(); i++) {
+			teteTmp.add(joueurs[i].getNbTete());
 		}
+		Collections.sort(teteTmp);
+		
+		for(int i = 0; i < this.nbJoueur(); i++) {
+			for(int j = 0; j < this.nbJoueur(); j++) {
+				if(teteTmp.get(i) == joueurs[j].getNbTete()) {
+					System.out.println(joueurs[j].getNom() + " a rammassé " + joueurs[j].getNbTete()+ " têtes de boeufs");
+				}
+			}
+			
+		}
+		
+	
 	}
+	
 }
