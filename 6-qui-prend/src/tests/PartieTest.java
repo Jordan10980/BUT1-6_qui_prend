@@ -30,8 +30,8 @@ public class PartieTest {
 		// test avec trop peu de joueur 
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/tests/config_2joueurs.txt");
-			assert false : "Le nombre de joueur est inférieur ou égale à 2 !";
+			Partie partie = new Partie("src/tests/config_1joueur.txt");
+			assert false : "Le nombre de joueur est inférieur à 2 !";
 			
 		} catch (Exception e) {
 			//System.out.println("test avec trop peu de joueur : OK");
