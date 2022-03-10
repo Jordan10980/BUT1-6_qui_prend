@@ -1,4 +1,4 @@
-package ihm;
+package appli;
 import game.Partie;
 
 /**
@@ -6,7 +6,7 @@ import game.Partie;
  * @author iPrisc & Jordan10980
  *
  */
-public class Appli {
+public class Application {
 
 	/**
 	 * Méthode principale permettant de créer et  lancer une partie de 6-qui-prend
