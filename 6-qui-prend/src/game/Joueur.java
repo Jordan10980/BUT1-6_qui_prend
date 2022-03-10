@@ -84,7 +84,7 @@ public class Joueur {
 		cartes.add(carte);
 	}
 	
-	public void prendSerie(Carte carte) {
+	public void rammasserCarte(Carte carte) {
 		cartesRamassees.add(carte);
 	}
 

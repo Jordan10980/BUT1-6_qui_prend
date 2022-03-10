@@ -58,7 +58,7 @@ public class JoueurTest {
 		// Teste si un joueur qui rammasse une carte provenant d'une série a bien son nombre de tête qui augmente"
 		Carte autreCarte= new Carte();
 		int nbTetejoueuseAvant = joueuse.getNbTete();
-		joueuse.prendSerie(autreCarte);
+		joueuse.rammasserCarte(autreCarte);
 		int nbTetejoueuseApres = joueuse.getNbTete();
 		int nbTeteCarte = autreCarte.getNbTete();
 		assertTrue("Le joueur qui ramasse une carte n'a pas son nombre de tête qui augmente en conséquence !", nbTetejoueuseApres ==  nbTetejoueuseAvant + nbTeteCarte);
