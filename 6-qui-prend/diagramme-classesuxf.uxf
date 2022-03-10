@@ -4,12 +4,13 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>287</x>
-      <y>189</y>
+      <x>224</x>
+      <y>161</y>
       <w>147</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>Partie
+bg=gray
 --
 Serie[] serie
 Paquet paquet
@@ -19,12 +20,13 @@ Joueur[] joueurs</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>287</x>
-      <y>294</y>
+      <x>224</x>
+      <y>266</y>
       <w>147</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>Serie
+bg=gray
 --
 List&lt;Carte&gt; cartesSerie
 </panel_attributes>
@@ -33,12 +35,13 @@ List&lt;Carte&gt; cartesSerie
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>287</x>
-      <y>490</y>
+      <x>224</x>
+      <y>462</y>
       <w>147</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>Carte
+bg=gray
 --
 
 </panel_attributes>
@@ -47,12 +50,13 @@ List&lt;Carte&gt; cartesSerie
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>98</x>
-      <y>294</y>
+      <x>35</x>
+      <y>266</y>
       <w>147</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>Paquet
+bg=gray
 --
 List&lt;Carte&gt; cartes
 
@@ -62,12 +66,13 @@ List&lt;Carte&gt; cartes
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>294</y>
+      <x>427</x>
+      <y>266</y>
       <w>154</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>Joueur
+bg=gray
 --
 List&lt;Carte&gt; cartes
 List&lt;Carte&gt; cartesRamassee
@@ -77,8 +82,8 @@ List&lt;Carte&gt; cartesRamassee
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>238</y>
+      <x>287</x>
+      <y>210</y>
       <w>63</w>
       <h>70</h>
     </coordinates>
@@ -91,8 +96,8 @@ Contient</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>357</x>
-      <y>322</y>
+      <x>294</x>
+      <y>294</y>
       <w>105</w>
       <h>182</h>
     </coordinates>
@@ -105,8 +110,8 @@ est constituée de </panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>161</x>
-      <y>322</y>
+      <x>98</x>
+      <y>294</y>
       <w>140</w>
       <h>217</h>
     </coordinates>
@@ -119,8 +124,8 @@ Contient</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>329</y>
+      <x>364</x>
+      <y>301</y>
       <w>175</w>
       <h>203</h>
     </coordinates>
@@ -133,8 +138,8 @@ a dans sa main</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>84</x>
-      <y>147</y>
+      <x>21</x>
+      <y>119</y>
       <w>616</w>
       <h>406</h>
     </coordinates>
@@ -144,8 +149,8 @@ a dans sa main</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>301</y>
+      <x>364</x>
+      <y>273</y>
       <w>77</w>
       <h>35</h>
     </coordinates>
@@ -158,8 +163,8 @@ Utilise</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>161</x>
-      <y>210</y>
+      <x>98</x>
+      <y>182</y>
       <w>140</w>
       <h>98</h>
     </coordinates>
@@ -172,8 +177,8 @@ Utilise</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>329</y>
+      <x>364</x>
+      <y>301</y>
       <w>259</w>
       <h>217</h>
     </coordinates>
@@ -186,8 +191,8 @@ a ramassé</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>245</x>
-      <y>231</y>
+      <x>182</x>
+      <y>203</y>
       <w>56</w>
       <h>280</h>
     </coordinates>
@@ -198,8 +203,8 @@ Utilise</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>231</y>
+      <x>364</x>
+      <y>203</y>
       <w>210</w>
       <h>77</h>
     </coordinates>
@@ -212,23 +217,25 @@ Est jouée par</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>511</x>
-      <y>28</y>
+      <x>448</x>
+      <y>0</y>
       <w>154</w>
       <h>105</h>
     </coordinates>
-    <panel_attributes>appli</panel_attributes>
+    <panel_attributes>appli
+fg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>539</x>
-      <y>70</y>
+      <x>476</x>
+      <y>42</y>
       <w>98</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>Application
+bg=gray
 --
 </panel_attributes>
     <additional_attributes/>
@@ -236,12 +243,13 @@ Est jouée par</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>588</x>
+      <x>525</x>
       <y>175</y>
       <w>98</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>Console
+bg=gray
 --
 </panel_attributes>
     <additional_attributes/>
@@ -249,168 +257,193 @@ Est jouée par</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>763</x>
-      <y>147</y>
+      <x>700</x>
+      <y>119</y>
       <w>378</w>
       <h>357</h>
     </coordinates>
-    <panel_attributes>tests</panel_attributes>
+    <panel_attributes>fg=blue
+tests</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>791</x>
-      <y>189</y>
+      <x>728</x>
+      <y>161</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>JoueurTest
+bg=gray
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>868</x>
-      <y>455</y>
+      <x>805</x>
+      <y>427</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>SerieTest
+bg=gray
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>889</x>
-      <y>364</y>
+      <x>826</x>
+      <y>336</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>PartieTest
+bg=gray
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>959</x>
-      <y>273</y>
+      <x>896</x>
+      <y>245</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>PaquetTest
+bg=gray
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>637</x>
-      <y>217</y>
+      <x>574</x>
+      <y>189</y>
       <w>182</w>
       <h>119</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;150.0;240.0;150.0;240.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
-      <y>217</y>
+      <x>350</x>
+      <y>189</y>
       <w>448</w>
       <h>343</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;450.0;10.0;470.0;620.0;470.0;610.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
-      <y>483</y>
+      <x>315</x>
+      <y>455</y>
       <w>525</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;120.0;730.0;120.0;730.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
-      <y>322</y>
+      <x>350</x>
+      <y>294</y>
       <w>469</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;220.0;650.0;220.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>406</x>
-      <y>238</y>
+      <x>343</x>
+      <y>210</y>
       <w>497</w>
       <h>147</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0;650.0;30.0;650.0;190.0;690.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>567</x>
-      <y>329</y>
+      <x>504</x>
+      <y>301</y>
       <w>336</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;460.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>322</y>
+      <x>322</x>
+      <y>294</y>
       <w>567</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=blue
 Utilise</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;180.0;790.0;180.0;790.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>98</y>
+      <x>364</x>
+      <y>70</y>
       <w>147</w>
-      <h>133</h>
+      <h>119</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
+fg=green
 Utilise</panel_attributes>
-    <additional_attributes>10.0;170.0;190.0;170.0;190.0;10.0</additional_attributes>
+    <additional_attributes>10.0;150.0;190.0;150.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>119</x>
-      <y>301</y>
+      <x>56</x>
+      <y>273</y>
       <w>959</w>
       <h>301</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 Utilise</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;410.0;1350.0;410.0;1350.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>182</y>
+      <w>175</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Utilise</panel_attributes>
+    <additional_attributes>230.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
