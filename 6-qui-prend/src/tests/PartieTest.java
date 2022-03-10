@@ -24,7 +24,7 @@ public class PartieTest {
 			assert false : "Le nombre de joueur est supérieur à 10 !";
 			
 		} catch (Exception e) {
-//			System.out.println("test avec plus de joueur que possible : OK");
+			//System.out.println("test avec plus de joueur que possible : OK");
 		}
 		
 		// test avec trop peu de joueur 
@@ -34,7 +34,7 @@ public class PartieTest {
 			assert false : "Le nombre de joueur est inférieur ou égale à 2 !";
 			
 		} catch (Exception e) {
-			System.out.println("test avec trop peu de joueur : OK");
+			//System.out.println("test avec trop peu de joueur : OK");
 		}
 
 		// test le nombre de joueur de la partie
