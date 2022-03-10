@@ -89,7 +89,7 @@ public class PartieTest {
 					assertTrue("Deux serie ont le même numéro !", serie.getNumero() != autreSerie.getNumero());
 				}
 
-				//  teste si la série un bien une carte avant le démarrage de la partie
+				//  teste si la série a un bien une carte avant le démarrage de la partie
 				assertTrue("Une serie avant démarrage de la partie possède déjà des tête !", serie.nbCarte() == 1 && serie.derniereCarte() != null);
 				assertTrue("Une serie avant démarrage de la partie possède déjà des tête !", serie.nbTete() > 0);
 				
