@@ -7,18 +7,19 @@ import java.util.List;
 public class Paquet {
 	
 	private List<Carte> cartes = new ArrayList<Carte>();
-	private final static int nbCartes = 104;
-	private static int nb_cartes_joueur = 10;
+	public final static int NB_CARTE_PAQUET = 104;
+	public static int NB_CARTES_JOUEUR = 10;
 	
 	public Paquet() {
-		for(int i = 1; i <= nbCartes; i++) {
+		for(int i = 1; i <= NB_CARTE_PAQUET; i++) {
 			Carte c = new Carte();
 			cartes.add(c);
 		}
 	}
 	
-	public List<Carte> getCartes(){
-		return cartes;
+	
+	public int nbCarte() {
+		return cartes.size();
 	}
 	
 	public void melangerCartes() {
@@ -26,14 +27,16 @@ public class Paquet {
 	}
 	
 	public void distributionCartes(Joueur joueur) {
-		for(int i = 0; i < nb_cartes_joueur; i++) {
+		for(int i = 0; i < NB_CARTES_JOUEUR; i++) {
 			Carte carte = cartes.remove(0);
 			joueur.prendCarte(carte);
 		}
 	}
 	
 	public void distributionSeries(Serie serie) {
-		serie.ajouterCarte(cartes.remove(0));
+		if(!serie.estPleine()) {
+			serie.ajouterCarte(cartes.remove(0));
+		}
 	}
 
 	public void afficherCartes() {

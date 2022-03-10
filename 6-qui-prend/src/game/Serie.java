@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Serie {
-	private static final int maxCartesSerie = 5;
+	public static final int MAX_SERIE_CARTE = 5;
 	private int numero;
 	private static int numerocpt = 1;
-	private List<Carte> cartesSerie = new ArrayList(5);
+	private List<Carte> cartesSerie = new ArrayList<Carte>();
 	
 	
 	public Serie() {
@@ -17,7 +17,6 @@ public class Serie {
 		this.numero = numerocpt++;
 	}
 	
-
 
 	@Override
 	public String toString() { // Affichages des cartes de la serie
@@ -44,11 +43,13 @@ public class Serie {
 	}
 	
 	public void ajouterCarte(Carte c) {
-		cartesSerie.add(c);
+		if(! estPleine()) {
+			cartesSerie.add(c);
+		}
 	}
 
 	public boolean estPleine() {
-		return (cartesSerie.size() == 5);
+		return (cartesSerie.size() == MAX_SERIE_CARTE);
 	}
 
 	public int nbTete() {
@@ -64,6 +65,10 @@ public class Serie {
 			Carte carte = cartesSerie.remove(0);
 			joueur.prendSerie(carte);
 		}
+	}
+	
+	public int nbCarte() {
+		return cartesSerie.size();
 	}
 	
 }

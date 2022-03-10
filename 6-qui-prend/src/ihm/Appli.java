@@ -15,12 +15,17 @@ public class Appli {
 	 */
 	public static void main(String[] args) {
 	
-		// Création d'une partie
-		Partie partie = new Partie();
-		
-		// Démarrage du jeu....
-		partie.demarrer();
-		
+		try {
+			// Création d'une partie
+			Partie partie = new Partie();
+			
+			// Démarrage du jeu....
+			partie.demarrer();
+			
+		} catch (Exception e) {
+			System.out.println("La partie a du se terminer prématurément du à l'erreur suivante : " + e.getMessage());
+		}
+
 		// possibilité de Jouer plusieurs manches en accumulant les pts de chaque manche.
 		
 		
