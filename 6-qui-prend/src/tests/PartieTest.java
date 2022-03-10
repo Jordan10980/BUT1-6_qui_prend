@@ -24,13 +24,13 @@ public class PartieTest {
 			assert false : "Le nombre de joueur est supérieur à 10 !";
 			
 		} catch (Exception e) {
-			System.out.println("test avec plus de joueur que possible : OK");
+//			System.out.println("test avec plus de joueur que possible : OK");
 		}
 		
 		// test avec trop peu de joueur 
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/test/config_2joueurs.txt");
+			Partie partie = new Partie("src/tests/config_2joueurs.txt");
 			assert false : "Le nombre de joueur est inférieur ou égale à 2 !";
 			
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class PartieTest {
 		// test le nombre de joueur de la partie
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/test/config_4joueurs.txt");
+			Partie partie = new Partie("src/tests/config_4joueurs.txt");
 			assertTrue("Le nombre de joueur de la partie ne correspond pas au nombre de joueur dans le fichier !",partie.nbJoueur() == 4);
 			
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class PartieTest {
 		// test la bonne initialitation des joueur
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/test/config_4joueurs.txt");
+			Partie partie = new Partie("src/tests/config_4joueurs.txt");
 
 			for(int i=0 ; i < partie.nbJoueur(); i++) {
 				Joueur joueur = partie.getJoueurs(i);
@@ -76,7 +76,7 @@ public class PartieTest {
 		// test la bonne initialitation des series
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/test/config_4joueurs.txt");
+			Partie partie = new Partie("src/tests/config_4joueurs.txt");
 			
 			Paquet paquet = partie.getPaquet();
 			

@@ -12,14 +12,16 @@ import java.util.TreeMap;
 public class Partie {
 	public static final int NB_SERIE = 4;
 	
+	private static final String NOM_FICHIER_JOUEUR = "config.txt";
+	
 	// Les joueurs participant à la partie
-	Joueur[] joueurs;
+	private Joueur[] joueurs;
 	
 	// Le paquet de carte utilisé durant la partie
-	Paquet paquet;
+	private Paquet paquet;
 	
 	// Les différentes séries "en cours" utilisées durant la partie
-	Serie[] series;
+	private Serie[] series;
 
 	public Joueur getJoueurs(int indice) {
 		return joueurs[indice];
@@ -38,6 +40,10 @@ public class Partie {
 		return joueurs.length;
 	}
 
+	public Partie() throws Exception {
+		this(NOM_FICHIER_JOUEUR);
+	}
+
 	/**
 	 * La création/initialisation d'une Partie consiste en:
 	 * <LI> La création des joueurs de la partie à partir du fichier config.txt
@@ -45,9 +51,9 @@ public class Partie {
 	 * <LI> La distribution des cartes aux différents joueurs
 	 * <LI> La création/initialisation des série avec une carte initiale
 	 */
-	public Partie() {
+	public Partie(String nomFichierJoueur) throws Exception {
 		// Initialise une liste de joueur pour la partie
-		this.joueurs = initialiserJoueur();
+		this.joueurs = initialiserJoueur(nomFichierJoueur);
 
 		// Recupère un paquet mélangé
 		this.paquet = recupererNouveauPaquet();
@@ -103,9 +109,9 @@ public class Partie {
 	 * 
 	 * @return le tableau de joueur prêt à jouer à 6-qui-prend
 	 */
-	private Joueur[] initialiserJoueur() {
+	private Joueur[] initialiserJoueur(String nomFichierJoueur) throws Exception  {
 
-		List<String> listeNomJoueurs = lireNomJoueur();
+		List<String> listeNomJoueurs = lireNomJoueur(nomFichierJoueur);
 
 		Joueur[] joueurs = new Joueur[listeNomJoueurs.size() ];
 		for (int i = 0; i < listeNomJoueurs.size() ; i++) {
@@ -127,17 +133,14 @@ public class Partie {
 	 * 
 	 * @return la liste des nom de joueur
 	 */
-	private List<String> lireNomJoueur() {
+	private List<String> lireNomJoueur(String nomFichierJoueur) throws Exception {
 		
-		int count = 0;
-		final String nomFichierJoueur = "config.txt";
 		List<String> listeNomJoueurs = new ArrayList<String>();
 		try {
 
 			Scanner in = new Scanner(new FileInputStream(nomFichierJoueur));
 			while (in.hasNextLine()) {
 				listeNomJoueurs.add(in.nextLine());
-				count++;
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -146,13 +149,10 @@ public class Partie {
 			throw new RuntimeException(e);
 		}
 		
-			
-		if (count < 2 || count > 10) {
-			System.out.println("La partie ne pas commencer, saississez un nombre de joueurs entre 2 et 10 compris.");
-			throw new IllegalArgumentException();
-			}
-		
-		
+		if(listeNomJoueurs.size() < 2  || listeNomJoueurs.size() > 10) {
+			throw new Exception("Le nombre de joueur doit être plus grand que 2 et inférieur à 10");
+		}
+
 		return listeNomJoueurs;
 	}
 	
