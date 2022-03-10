@@ -146,9 +146,12 @@ public class Partie {
 			throw new RuntimeException(e);
 		}
 		
-		//faire une assertions pour voir si count est supérieur ou égale à 2
-		assert count >= 2; //sa marche pas ça
-		assert count <= 10;
+			
+		if (count < 2 || count > 10) {
+			System.out.println("La partie ne pas commencer, saississez un nombre de joueurs entre 2 et 10 compris.");
+			throw new IllegalArgumentException();
+			}
+		
 		
 		return listeNomJoueurs;
 	}

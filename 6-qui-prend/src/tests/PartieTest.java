@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ public class PartieTest {
 		// test avec plus de joueur que possible
 		try {
 			// Création d'une partie
-			Partie partie = new Partie("src/test/config_12joueurs.txt");
+			Partie partie = new Partie("src/tests/config_12joueurs.txt");			
 			assert false : "Le nombre de joueur est supérieur à 10 !";
 			
 		} catch (Exception e) {
