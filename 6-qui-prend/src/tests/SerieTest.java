@@ -19,7 +19,7 @@ public class SerieTest {
 	
 	@Test
 	public void TestSeriePleine() {
-		// Teste si une serie auquel ont a ajouter le nombre maximal de carte est bien pleine
+		// Teste si une serie auquel ont a ajouté le nombre maximal de cartes est bien pleine
 		Serie serie = new Serie();
 		List<Carte> cartes = new ArrayList<Carte>();
 		for(int i=0; i<Serie.MAX_SERIE_CARTE; i++) {
@@ -33,14 +33,14 @@ public class SerieTest {
 	
 	@Test
 	public void TestDerniereCarte() {
-		// Teste si une serie auquel ont a ajouter le nombre maximal de carte est bien pleine
+		// Teste si  la dernière carte ajouté à la série est bien celle renvoyée par la méthode derniereCarte
 		Serie serie = new Serie();
 		Carte carte1 = new Carte();
 		Carte carte2 = new Carte();
 		serie.ajouterCarte(carte1);
 		serie.ajouterCarte(carte2);
 		assertTrue("La dernière carte de la serie est celle que l'on a jouter en premier ! " , ! carte1.equals(serie.derniereCarte()));
-		assertTrue("La dernière carte de la serie n'est celle que l'on a jouter en dernier ! ", carte2.equals(serie.derniereCarte()));
+		assertTrue("La dernière carte de la serie n'est pas celle que l'on a jouter en dernier ! ", carte2.equals(serie.derniereCarte()));
 	}
 	
 

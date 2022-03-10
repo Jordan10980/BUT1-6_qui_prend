@@ -8,7 +8,6 @@ public class Paquet {
 	
 	private List<Carte> cartes = new ArrayList<Carte>();
 	public final static int NB_CARTE_PAQUET = 104;
-	public static int NB_CARTES_JOUEUR = 10;
 	
 	public Paquet() {
 		for(int i = 1; i <= NB_CARTE_PAQUET; i++) {
@@ -16,7 +15,6 @@ public class Paquet {
 			cartes.add(c);
 		}
 	}
-	
 	
 	public int nbCarte() {
 		return cartes.size();
@@ -26,17 +24,8 @@ public class Paquet {
 		Collections.shuffle(cartes);
 	}
 	
-	public void distributionCartes(Joueur joueur) {
-		for(int i = 0; i < NB_CARTES_JOUEUR; i++) {
-			Carte carte = cartes.remove(0);
-			joueur.prendCarte(carte);
-		}
-	}
-	
-	public void distributionSeries(Serie serie) {
-		if(!serie.estPleine()) {
-			serie.ajouterCarte(cartes.remove(0));
-		}
+	public Carte pioche() {
+		return cartes.remove(0);
 	}
 
 	public void afficherCartes() {

@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 public class Partie {
 	public static final int NB_SERIE = 4;
+	public static int NB_CARTES_JOUEUR = 10;
 	
 	private static final String NOM_FICHIER_JOUEUR = "config.txt";
 	
@@ -60,13 +61,20 @@ public class Partie {
 		
 		// Distribue les cartes du paquet aux différents joueurs
 		for (int i = 0; i < joueurs.length; i++) {
-			paquet.distributionCartes(joueurs[i]);
+			distributionCartes(paquet, joueurs[i]);
 		}
 		
 		// Crée les séries pour le démarrage du jeu
 		this.series = creerSeries(paquet);
 	}
 	
+	private void distributionCartes(Paquet paquet, Joueur joueur) {
+		for(int i = 0; i < NB_CARTES_JOUEUR; i++) {
+			Carte carte = paquet.pioche();
+			joueur.prendCarte(carte);
+		}
+	}
+
 	/**
 	 * Crée les séries de jeu en piochant des cartes du paquet de carte
 	 * 
@@ -88,10 +96,17 @@ public class Partie {
 	 */
 	private Serie creerNouvelleSerie(Paquet paquet) {
 		Serie serie  = new Serie();
-		paquet.distributionSeries(serie);
+		distributionSeries(paquet, serie);
 		return serie;
 	}
 
+	private void distributionSeries(Paquet paquet, Serie serie) {
+		if(!serie.estPleine()) {
+			serie.ajouterCarte(paquet.pioche());
+		}
+	}
+
+	
 	/**
 	 * Récupère un nouveau paquet de carte complet pour jouer à 6-qui-prend<BR>
 	 * Le paquet de carte récupéré est déjà mélangé et prêt à être distribué.
@@ -417,7 +432,6 @@ public class Partie {
 		}
 		
 		// si les joueurs ont le même nombre de têtes de boeufs on les tries par odre alphabétique
-		
 	
 	}
 	

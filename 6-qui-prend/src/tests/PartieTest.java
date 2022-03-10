@@ -62,7 +62,7 @@ public class PartieTest {
 				Joueur joueur = partie.getJoueurs(i);
 
 				//  teste le nombre de carte des joueurs avant le démarrage de la partie
-				assertTrue("L'un des joueurs n'a pas ses " + Paquet.NB_CARTES_JOUEUR + " cartes en main avant le démarrage de la partier",joueur.getNbCarteJoueur() ==  Paquet.NB_CARTES_JOUEUR);
+				assertTrue("L'un des joueurs n'a pas ses " + Partie.NB_CARTES_JOUEUR + " cartes en main avant le démarrage de la partier",joueur.getNbCarteJoueur() ==  Partie.NB_CARTES_JOUEUR);
 			}
 		} catch (Exception e) {
 			assert false : "Erreur inattendue pendant les tests";
@@ -92,18 +92,6 @@ public class PartieTest {
 				//  teste si la série a un bien une carte avant le démarrage de la partie
 				assertTrue("Une serie avant démarrage de la partie possède déjà des tête !", serie.nbCarte() == 1 && serie.derniereCarte() != null);
 				assertTrue("Une serie avant démarrage de la partie possède déjà des tête !", serie.nbTete() > 0);
-				
-				//  teste si une serie dans laquelle on a ajouté le nombre maximale de carte est bien pleine
-				for( int j=0; j < Serie.MAX_SERIE_CARTE ; j++) {
-					paquet.distributionSeries(serie);
-				}
-				assertTrue("une serie dans laquelle on a ajouter " + Serie.MAX_SERIE_CARTE + " carte n'est pas pleine !",serie.estPleine());
-
-				// Vérifie qu'on ne peut pas ajouter de carte à une série qui est déjà pleine
-				int nbCartePaquetAvant = paquet.nbCarte();
-				paquet.distributionSeries(serie);
-				int nbCartePaquetApres = paquet.nbCarte();
-				assertTrue("Il ne devrait pas être possible d'ajouter une carte à une série qui est déjà pleine !", nbCartePaquetApres == nbCartePaquetAvant);
 				
 			}
 		} catch (Exception e) {

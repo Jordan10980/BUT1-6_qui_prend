@@ -1,13 +1,10 @@
 package tests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import game.Joueur;
 import game.Paquet;
-import game.Serie;
 
 public class PaquetTest {
 	
@@ -22,25 +19,12 @@ public class PaquetTest {
 	}
 
 	@Test
-	public void TestDistributionCarteJoueur() {
-		// Teste si la distribution des cartes à un joueur se fait correctement
+	public void TestPioche() {
+		// Teste si la pioche enleve bien une carte au paquet
 		Paquet  paquet = new Paquet();
-		Joueur joueur = new Joueur("Ringo");
 
 		int nbCartePaquetAvant = paquet.nbCarte();
-		paquet.distributionCartes(joueur);
-		int nbCartePaquetApres = paquet.nbCarte();
-		assertTrue("Le nombre de cartes restantes dans le paquet après distribution d'un joueur n'est pas correct !", nbCartePaquetAvant == nbCartePaquetApres + paquet.NB_CARTES_JOUEUR);
-	}
-
-	@Test
-	public void TestDistributionCarteSerie() {
-		// Teste si la distribution des cartes à une série se fait correctement
-		Paquet  paquet = new Paquet();
-		Serie serie = new Serie();
-
-		int nbCartePaquetAvant = paquet.nbCarte();
-		paquet.distributionSeries(serie);
+		paquet.pioche();
 		int nbCartePaquetApres = paquet.nbCarte();
 		assertTrue("Le nombre de cartes restantes dans le paquet après distribution d'une série n'est pas correct !", nbCartePaquetAvant == nbCartePaquetApres +1);
 	}
