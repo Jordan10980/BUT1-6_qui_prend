@@ -108,6 +108,9 @@ public class Joueur {
 					carteChoisie = cartes.remove(indice);
 					//Partie.cartes_posees.add(carteJoue);
 				}
+				else{
+					System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
+				}
 				
 			}
 			else{

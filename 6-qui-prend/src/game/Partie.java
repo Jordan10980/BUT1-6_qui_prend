@@ -372,6 +372,10 @@ public class Partie {
 				indice = serieExiste(Integer.valueOf(rep));
 				if(indice != -1) {
 					serieChoisie = series[indice];
+						
+				}
+				else{
+					System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 				}
 			}
 			else{
