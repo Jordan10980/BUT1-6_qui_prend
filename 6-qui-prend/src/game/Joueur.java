@@ -101,18 +101,31 @@ public class Joueur {
 		do {
 			Scanner sc = new Scanner(System.in);
 			String rep = sc.next();
-			indice = carteExiste(Integer.valueOf(rep));
-			if(indice != -1) {
-				carteChoisie = cartes.remove(indice);
-				//Partie.cartes_posees.add(carteJoue);
+			if(isStringInteger(rep,10)== true) {
+				indice = carteExiste(Integer.valueOf(rep));
+				
+				if(indice != -1) {
+					carteChoisie = cartes.remove(indice);
+					//Partie.cartes_posees.add(carteJoue);
+				}
+				
 			}
 			else{
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
 			}
+			
+			
 		} while(indice == -1);
 		return carteChoisie;
 	}
 	
+	
+	public static boolean isStringInteger(String stringToCheck, int radix) {
+        Scanner sc = new Scanner(stringToCheck.trim());
+        if(!sc.hasNextInt(radix)) return false;
+        sc.nextInt(radix);
+        return !sc.hasNext();
+    }
 	
 	private int carteExiste(int valeur) {
 		for(int i = 0; i < cartes.size(); i++) {

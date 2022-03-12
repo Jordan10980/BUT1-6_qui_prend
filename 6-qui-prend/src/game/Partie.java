@@ -368,9 +368,11 @@ public class Partie {
 		do {
 			Scanner sc = new Scanner(System.in);
 			String rep = sc.next();
-			indice = serieExiste(Integer.valueOf(rep));
-			if(indice != -1) {
-				serieChoisie = series[indice];
+			if(isStringInteger(rep,10)== true) {
+				indice = serieExiste(Integer.valueOf(rep));
+				if(indice != -1) {
+					serieChoisie = series[indice];
+				}
 			}
 			else{
 				System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");	
@@ -380,6 +382,13 @@ public class Partie {
 		return serieChoisie;
 		
 	}
+	
+	public static boolean isStringInteger(String stringToCheck, int radix) {
+        Scanner sc = new Scanner(stringToCheck.trim());
+        if(!sc.hasNextInt(radix)) return false;
+        sc.nextInt(radix);
+        return !sc.hasNext();
+    }
 	
 	/**
 	 * Vérifie qu'une série exsite en fonction d'un numéro.
