@@ -1,4 +1,4 @@
-# 6 qui prend by @Jordan10980 et @
+# 6 qui prend by @Jordan10980 et @iPrisc
 Dans le cadre de notre première année de BUT informatique, nous avions un projet de Saé.
 Le but était de réaliser un 6 qui prend en Java.
 
