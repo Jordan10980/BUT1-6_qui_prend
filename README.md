@@ -1,6 +1,6 @@
 # 6 qui prend by @Jordan10980
-Dans le cadre de notre première année de BUT informatique, nous avions un projet de Saé.
-Le but était de réalisé un 6 qui prend en Java.
+Dans le cadre de notre première année de BUT informatique, nous avions un projet de Saé.\n
+Le but était de réaliser un 6 qui prend en Java.
 
 # Les règles du jeu
 https://www.regledujeu.fr/6-qui-prend/
