@@ -1,5 +1,5 @@
-# 6 qui prend by @Jordan10980
-Dans le cadre de notre première année de BUT informatique, nous avions un projet de Saé.\n
+# 6 qui prend by @Jordan10980 et @
+Dans le cadre de notre première année de BUT informatique, nous avions un projet de Saé.
 Le but était de réaliser un 6 qui prend en Java.
 
 # Les règles du jeu
